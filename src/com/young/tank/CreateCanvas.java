@@ -11,7 +11,7 @@ public class CreateCanvas extends JPanel{
 	/**
 	 * Time:20170324
 	 */
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void paint(Graphics g) {

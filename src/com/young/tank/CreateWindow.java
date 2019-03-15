@@ -12,13 +12,18 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+/**
+ * @author linzhongqi
+ * @data 2019年3月15日
+ * 
+ */
 public class CreateWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	private int width;
 	private int height;
 	private int fps;
-	private Image icoimg;
+	private Image logo;
 	private CreateCanvas cc;
 	
 	boolean bup = false;
@@ -37,16 +42,16 @@ public class CreateWindow extends JFrame{
 	 *            窗口高度
 	 * @param fps
 	 *            每秒钟刷新次数
-	 * @param icoimg
+	 * @param logo
 	 *            窗口图标
 	 */
-	public CreateWindow(String title, int width, int height, int fps, Image icoimg) throws HeadlessException {
+	public CreateWindow(String title, int width, int height, int fps, Image logo) throws HeadlessException {
 		super(title);
 		this.width = width;
 		this.height = height;
 		this.fps = fps;
-		this.icoimg = icoimg;
-		CreateJFrame();
+		this.logo = logo;
+		createJFrame();
 //		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
 	}
 	
@@ -62,29 +67,26 @@ public class CreateWindow extends JFrame{
 	 * @param fps
 	 *            每秒钟刷新次数
 	 */
-	public CreateWindow(String title, int width, int height,  int fps){
-		super(title);
-		this.width = width;
-		this.height = height;
-		this.fps = fps;
-		CreateJFrame();
-//		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
-	}
+//	public CreateWindow(String title, int width, int height,  int fps){
+//		super(title);
+//		this.width = width;
+//		this.height = height;
+//		this.fps = fps;
+//		createJFrame();
+////		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
+//	}
 	
-	private final void CreateJFrame(){
-		setLayout(null);
-		setSize(width+5, height+29);
+	private final void createJFrame(){
+		setSize(width, height);		//窗口大小
+		setLocation(350, 100);		//窗口位置
 		
 		final CreateCanvas cc = new CreateCanvas();
-		cc.setBackground(new Color(193, 193, 193));
-		cc.setBounds(0, 0, width, height);
 		add(cc);
-
+		System.out.println("hshshs");
 		setResizable(false);
-		setIconImage(icoimg);
+		setIconImage(logo);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
-		/////////////////////////////////////////////////////
 //		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 //		for (int i = 0; i < 8; i++) {
 //			for (int j = 0; j < 6; j++) {
@@ -102,19 +104,13 @@ public class CreateWindow extends JFrame{
 //			Data.create_map = new CreateMap();
 //		}
 		
-		
-
-		
-		
 //		Data.matarry.add(0, new Tank_npc(0, 2, 192, 0, 3, 6, 5));
 //		Data.matarry.add(0, new Tank_npc(0, 2, 384,0, 3, 7, 5));
 //		Data.matarry.add(0, new Tank_npc(0, 2, 0, 0, 3, 8, 5));
 		
-
 		new GameStart();
 	
 //		new TankOther();
-		
 		
 //		Data.matarry.add(new Sea(0, 7,128,192, 1));
 //		Data.matarry.add(new Sea(0, 7,160,192, 1));
@@ -125,7 +121,6 @@ public class CreateWindow extends JFrame{
 //		}
 		
 //		Data.matarry.add(new Bullet(0, 5, 64, 64, 40, 5))
-		///////////////////////////////////////////////////////
 		
 		new Timer(1000 / fps ,new ActionListener(){
 

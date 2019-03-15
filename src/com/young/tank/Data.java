@@ -4,15 +4,19 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author linzhongqi
+ * @data 2019年3月15日
+ * 数据类
+ */
 public class Data {
 	public static final int WINDOW_WIDTH = 600;
-	public static final int WINDOW_HEIGHT = 480;
+	public static final int WINDOW_HEIGHT = 480+30;
 	public static final int WINDOW_FPS = 100;
 	public static final String WINDOW_TITLE = "《坦克大战》 作者：林中奇";
 	public static final Image WINDOW_ICOIMG = Toolkit.getDefaultToolkit().getImage("img/logo.png");
-	public static final Image TANK_PLAN = Toolkit.getDefaultToolkit().getImage("img/tankIcon.png");//tank_sprite//space_sprite_full1
+	public static final Image TANK_PLAN = Toolkit.getDefaultToolkit().getImage("img/tankIcon.png");
 	public static final Image Start_Img = Toolkit.getDefaultToolkit().getImage("img/tankCover.png");
-	
 	
 	public static CopyOnWriteArrayList<Material> matarry = new CopyOnWriteArrayList<Material>();
 	public static CreateMap create_map = new CreateMap();
