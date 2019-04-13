@@ -13,9 +13,8 @@ public class TankOther {
 	private static int fps_1;
 	private static int rand = 1;
 	private static int rand_1 = 1;
-	private static int tank_sum = 20;
-	public static int tank_sum_1 = 4;
-	
+	public static int enemySum = 20;		//敌人数
+	public static int myTank = 4;			//本方数
 	
 	
 	@SuppressWarnings("unchecked")
@@ -33,6 +32,7 @@ public class TankOther {
 				// TODO 自动生成的 catch 块
 				e1.printStackTrace();
 			}
+		System.out.println("TankOther()"+Data.matarry);
 		for (Material mat : Data.matarry) {
 			if (mat.material_x / 32 == 192 /32 && mat.material_y / 32 == 0 / 32){
 				Data.matarry.remove(mat);
@@ -56,7 +56,7 @@ public class TankOther {
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		new AudioPlay().play("src\\com\\young\\tank\\intro.wav");
 	}
-
+	//添加坦克
 	public static void newtank(){
 		int temp = 0;
 		int temp_1 = 0;
@@ -74,11 +74,13 @@ public class TankOther {
 				temp1++;
 			}
 		}
+//		System.out.println(temp1);
 		if (temp1 <= 0){
-			if (tank_sum_1 > 0){
+			if (myTank > 0){
 				if (fps_1 % rand_1 == 0){
-					tank_sum_1--;
+					myTank--;
 					rand_1 = new Random().nextInt(50) + 100;
+					//坦克出现的位置
 					Data.mat = new Tank_man(0, 8, 128, 384, 3, 1, 3);
 					Data.matarry.add(0 ,Data.mat);
 				}
@@ -87,10 +89,10 @@ public class TankOther {
 			fps_1 = 1;
 		}
 		
-		if (tank_sum > 0){
+		if (enemySum > 0){
 			if (temp < 4){
 				if (fps % rand == 0){
-					tank_sum--;
+					enemySum--;
 					rand = new Random().nextInt(50) + 100;
 					temp_1 = new Random().nextInt(3);
 					if (temp_1 == 0){
@@ -108,11 +110,11 @@ public class TankOther {
 	}
 	
 	public static void draw(Graphics g, CreateCanvas cc) {
-		for (int i = 0; i <= tank_sum / 2; i++) {
-			if (i == tank_sum / 2&& tank_sum % 2 == 1){
+		for (int i = 0; i <= enemySum / 2; i++) {
+			if (i == enemySum / 2&& enemySum % 2 == 1){
 				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
 						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
-			}else if(i < tank_sum / 2){
+			}else if(i < enemySum / 2){
 				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
 						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
 				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 52, Data.MIN_Y + i * 16, Data.MAX_X + 84, Data.MIN_Y + i * 16 +32, 
@@ -125,7 +127,7 @@ public class TankOther {
 				34 * 10 + 1, 34 * 6 + 1, 34 * 11 - 1, 34 * 7 - 1, cc);
 		g.setColor(Color.BLACK);
 		g.setFont( new Font("微软雅黑",Font.BOLD,19));//设置字体
-        g.drawString("" + tank_sum_1, Data.MAX_X + 62, Data.MIN_Y + 271);//画文本
+        g.drawString("" + myTank, Data.MAX_X + 62, Data.MIN_Y + 271);//画文本
 		
 	}
 }

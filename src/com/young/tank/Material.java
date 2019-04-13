@@ -25,7 +25,7 @@ public abstract class Material implements Serializable{
 		this.material_x = material_x;
 		this.material_y = material_y;
 		this.refurbish = refurbish;
-	}
+	} 
 
 	public int getImg_x() {
 		return img_x;

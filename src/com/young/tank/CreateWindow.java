@@ -1,5 +1,6 @@
 package com.young.tank;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -15,6 +16,7 @@ import javax.swing.WindowConstants;
 /**
  * @author linzhongqi
  * @data 2019年3月15日
+ * 显示操作类
  * 
  */
 public class CreateWindow extends JFrame{
@@ -26,24 +28,15 @@ public class CreateWindow extends JFrame{
 	private Image logo;
 	private CreateCanvas cc;
 	
-	boolean bup = false;
-	boolean bdo = false;
-	boolean ble = false;
-	boolean bri = false;
 	int n = 0;
 	/**
 	 * 创建窗口
 	 * 
-	 * @param title
-	 *            窗口标题
-	 * @param width
-	 *            窗口宽度
-	 * @param height
-	 *            窗口高度
-	 * @param fps
-	 *            每秒钟刷新次数
-	 * @param logo
-	 *            窗口图标
+	 * @param title 窗口标题
+	 * @param width 窗口宽度
+	 * @param height 窗口高度
+	 * @param fps 每秒钟刷新次数
+	 * @param 
 	 */
 	public CreateWindow(String title, int width, int height, int fps, Image logo) throws HeadlessException {
 		super(title);
@@ -55,73 +48,19 @@ public class CreateWindow extends JFrame{
 //		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
 	}
 	
-	/**
-	 * 创建窗口
-	 * 
-	 * @param title
-	 *            窗口标题
-	 * @param width
-	 *            窗口宽度
-	 * @param height
-	 *            窗口高度
-	 * @param fps
-	 *            每秒钟刷新次数
-	 */
-//	public CreateWindow(String title, int width, int height,  int fps){
-//		super(title);
-//		this.width = width;
-//		this.height = height;
-//		this.fps = fps;
-//		createJFrame();
-////		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
-//	}
-	
 	private final void createJFrame(){
 		setSize(width, height);		//窗口大小
 		setLocation(350, 100);		//窗口位置
 		
 		final CreateCanvas cc = new CreateCanvas();
 		add(cc);
-		System.out.println("hshshs");
 		setResizable(false);
 		setIconImage(logo);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setVisible(true);
-//		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
-//		for (int i = 0; i < 8; i++) {
-//			for (int j = 0; j < 6; j++) {
-//				if (i >= 2 && j >= 2 && i < 6){
-//					continue;
-//				}
-//				Data.matarry.add(new Wall(0, 0, 176 + i * 8 , 368 + j * 8, 3));
-//			}
-//		}
-
-		
-//		if (Data.start == 1){
-//			
-//		}else if (Data.start == 2){
-//			Data.create_map = new CreateMap();
-//		}
-		
-//		Data.matarry.add(0, new Tank_npc(0, 2, 192, 0, 3, 6, 5));
-//		Data.matarry.add(0, new Tank_npc(0, 2, 384,0, 3, 7, 5));
-//		Data.matarry.add(0, new Tank_npc(0, 2, 0, 0, 3, 8, 5));
-		
+		setVisible(true);		
 		new GameStart();
-	
-//		new TankOther();
 		
-//		Data.matarry.add(new Sea(0, 7,128,192, 1));
-//		Data.matarry.add(new Sea(0, 7,160,192, 1));
-//		for (int i = 0; i < 3; i++) {
-//			for (int j = 0; j < 3; j++) {
-//				Data.matarry.add(new Grass(4, 7, i * 32, j * 32, 1));
-//			}
-//		}
-		
-//		Data.matarry.add(new Bullet(0, 5, 64, 64, 40, 5))
-		
+		//绘制动画，以1000/fps毫秒触发动作时间
 		new Timer(1000 / fps ,new ActionListener(){
 
 			@Override
@@ -130,21 +69,15 @@ public class CreateWindow extends JFrame{
 				if (n >= fps * 100){
 					n = 0;
 				}
-				
 				if (Data.start == 1){
 					TankOther.newtank();
 				}
-				
-				
-			
 				for (Material mat : Data.matarry) {
 					mat.anew(n);
 				}
-					
 				if(Data.start == 2){
 					Data.create_map.anew(n);
 				}
-				
 				if (Data.start == 3){
 					GameStart.anew(n);
 				}
@@ -153,17 +86,18 @@ public class CreateWindow extends JFrame{
 			}
 			
 		}).start();
-		
-		addKeyListener(new KeyListener() {//addKeyListener 添加指定的按键侦听器，以接收发自此组件的按键事件。
+		//addKeyListener 添加指定的按键侦听器，以接收发自此组件的按键事件。
+		addKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyTyped(KeyEvent e) {//键入某个键时调用此方法。
+			//按下一个键然后释放该键后被调用
+			public void keyTyped(KeyEvent e) {
 				// TODO 自动生成的方法存根
-				
 			}
 			
 			@Override
-			public void keyReleased(KeyEvent e) {//释放某个键时调用此方法。
+			//释放某个键时调用此方法。
+			public void keyReleased(KeyEvent e) {
 				// TODO 自动生成的方法存根
 				if (Data.start == 1){
 					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
@@ -172,37 +106,51 @@ public class CreateWindow extends JFrame{
 						((Tank_man)(Data.mat)).upKey(1);
 					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
 						((Tank_man)(Data.mat)).upKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//37右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
 						((Tank_man)(Data.mat)).upKey(3);
 					}
 				}
 			}
 			
 			@Override
-			public void keyPressed(KeyEvent e) {//按下某个键时调用此方法。
+//			向左箭头 --> 37 非数字方向键-VK_LEFT 
+//			向上箭头 --> 38 非数字方向键-VK_UP
+//			向右箭头 --> 39 非数字方向键-VK_RIGHT
+//			向下箭头 --> 40 非数字方向键-VK_DOWN
+//			开火键 --> F键-VK_F
+			//按下某个键时调用此方法。
+			public void keyPressed(KeyEvent e) {
 				// TODO 自动生成的方法存根
-				if (Data.start == 1){
+				if (Data.start == 1){ //单机模式
 					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
 						((Tank_man)(Data.mat)).downKey(0);
 					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
 						((Tank_man)(Data.mat)).downKey(1);
 					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
 						((Tank_man)(Data.mat)).downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//37右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
 						((Tank_man)(Data.mat)).downKey(3);
 					}
-					
-					if (e.getKeyCode() == KeyEvent.VK_S){
+					//按下F键发射炮弹
+					if (e.getKeyCode() == KeyEvent.VK_F){
 						((Tank_man)(Data.mat)).attack();
 					}
-				}else if (Data.start == 2){
+					//退出按键
+					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+						Data.matarry.clear();
+						TankOther.myTank = 4;			//返回封面，重置数量
+						TankOther.enemySum = 20;
+						new AudioPlay().stop();			//关闭音乐
+						Data.start = 3;
+					}
+				}else if (Data.start == 2){ //设置地图
 					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
 						Data.create_map.downKey(0);
 					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
 						Data.create_map.downKey(1);
 					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
 						Data.create_map.downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//37右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
 						Data.create_map.downKey(3);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_S){
@@ -218,26 +166,13 @@ public class CreateWindow extends JFrame{
 						Data.create_map.downKey(7);
 					}
 
-				}else if (Data.start == 3){
-					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
-						GameStart.downKey(0);
-					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
-						GameStart.downKey(1);
-					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
-						GameStart.downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//37右
-						GameStart.downKey(3);
-					}
-					if (e.getKeyCode() == KeyEvent.VK_S){
-						GameStart.downKey(4);
-					}
-					if (e.getKeyCode() == KeyEvent.VK_D){
-						GameStart.downKey(5);
-					}
-					if (e.getKeyCode() == KeyEvent.VK_U){
+				}else if (Data.start == 3){ //游戏开始页面
+//					进入 回车键-VK_ENTER
+//					选择 A键-VK_A
+					if (e.getKeyCode() == KeyEvent.VK_ENTER){
 						GameStart.downKey(6);
 					}
-					if (e.getKeyCode() == KeyEvent.VK_Y){
+					if (e.getKeyCode() == KeyEvent.VK_A){
 						GameStart.downKey(7);
 					}
 					
@@ -249,6 +184,7 @@ public class CreateWindow extends JFrame{
 	}
 	
 	public int getWindowHeight(){
+		System.out.println("getHeight");
 		return getHeight();
 	}
 	

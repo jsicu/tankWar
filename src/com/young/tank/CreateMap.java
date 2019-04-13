@@ -1,9 +1,14 @@
 package com.young.tank;
 
 import java.awt.Graphics;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;			//字节输出流，用于输出地图文件
+import java.io.ObjectOutputStream;			//对象输出流
 
+/**
+ * @author linzhongqi
+ * @data 2019年3月17日
+ * 制造地图类
+ */
 public class CreateMap {
 	public int img_x = 0;
 	public int img_y = 11;
@@ -22,7 +27,7 @@ public class CreateMap {
 	
 	
 	public CreateMap() {
-		super();
+//		super();
 		Data.matarry.clear();
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		for (int i = 0; i < 8; i++) {
@@ -111,6 +116,7 @@ public class CreateMap {
 			
 		}else if (num == 6){
 			try {
+				//文本文件中写多个对象的信息（序列化）
 				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.tmp"));
 				oos.writeObject(Data.matarry);
 				oos.close();

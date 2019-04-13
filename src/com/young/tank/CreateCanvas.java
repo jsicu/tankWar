@@ -11,20 +11,16 @@ public class CreateCanvas extends JPanel{
 	/**
 	 * Time:20170324
 	 */
-//	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.fillRect(Data.MIN_X, Data.MIN_Y, 416, 416);
 		
-		
 		for (Material mat : Data.matarry) {
 			mat.draw(g, this);
 		}
-		
-		
-		
 		if (Data.start == 1){
 			TankOther.draw(g, this);
 		}

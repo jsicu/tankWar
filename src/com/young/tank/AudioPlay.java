@@ -7,9 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AudioPlay {
-	AudioClip clip;
-	
-	
+	public static AudioClip clip;	
 	public void play(final String path){
 		new Thread(){
 			public void run(){
@@ -58,10 +56,6 @@ public class AudioPlay {
 	}
 	
 	public void stop(){
-//		new Thread(){
-//			public void run(){
-				clip.stop();
-//			}
-//		}.start();
+		clip.stop();
 	}
 }

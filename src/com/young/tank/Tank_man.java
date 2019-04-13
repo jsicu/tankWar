@@ -26,7 +26,15 @@ public class Tank_man extends Material{
 	private boolean take_left;
 	private boolean take_right;
 	private boolean defend;
-	
+	/**
+	 * 坦克模型及属性
+	 * 
+	 * @param img_x 模型在图集的x轴位置
+	 * @param img_y 模型在图集的y轴位置
+	 * @param material_x 模型在地图出生的x轴位置
+	 * @param material_y 模型在地图出生的y轴位置
+	 * @param logo 窗口图标
+	 */
 	public Tank_man(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.attack_id = 1;
@@ -428,7 +436,7 @@ public class Tank_man extends Material{
 					Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 					Data.matarry.remove(this);
 					die = true;
-					if (TankOther.tank_sum_1 <= 0){
+					if (TankOther.myTank <= 0){
 						new AudioPlay().play("src\\com\\young\\tank\\gameOver.wav");
 						Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 					}

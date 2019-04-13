@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class GameStart {
 	
-	private static int start_id;
+	private static int start_id;		//封面进入id
 	private static int fps = 0;
 	
 	public GameStart() {
@@ -24,7 +24,7 @@ public class GameStart {
 				Data.start = 2;
 			}else if (start_id == 0){
 				Data.matarry.clear();
-				new TankOther();
+				new TankOther();		//背景地图绘制
 				Data.start = 1;
 			}
 		}
@@ -42,8 +42,7 @@ public class GameStart {
 			fps = 0;
 		}
 		
-		g.drawImage(Data.Start_Img, 0, 0, Data.WINDOW_WIDTH, Data.WINDOW_HEIGHT, 
-				0, 0, Data.WINDOW_WIDTH, Data.WINDOW_HEIGHT, createCanvas);
+		g.drawImage(Data.Start_Img, 0, 0, Data.WINDOW_WIDTH, Data.WINDOW_HEIGHT,0, 0, Data.WINDOW_WIDTH, Data.WINDOW_HEIGHT, createCanvas);
 		
 		if (fps % (Data.WINDOW_FPS / 5) <= Data.WINDOW_FPS / 5 / 2){
 			g.drawImage(Data.TANK_PLAN, 170, 270 + start_id * 32, 170 +32, 270 +32 + start_id * 32, 

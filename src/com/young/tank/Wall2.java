@@ -3,6 +3,7 @@ package com.young.tank;
 import java.awt.Graphics;
 
 public class Wall2 extends Material{
+	//实现序列化类的不同版本间的兼容性
 	private static final long serialVersionUID = 2919258279665521877L;
 //墙
 	
