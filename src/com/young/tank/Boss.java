@@ -6,6 +6,7 @@ public class Boss extends Material{
 	private static final long serialVersionUID = 1818992270089337283L;
 
 	public Boss(int img_x, int img_y, int material_x, int material_y, int refurbish) {
+		//super调用父类的的构造方法
 		super(img_x, img_y, material_x, material_y, refurbish);
 		// TODO 自动生成的构造函数存根
 	}

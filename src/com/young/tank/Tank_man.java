@@ -2,6 +2,7 @@ package com.young.tank;
 
 import java.awt.Graphics;
 
+//继承抽象类，就要实现里面的抽象方法
 public class Tank_man extends Material{
 	private static final long serialVersionUID = 8135824104107706697L;
 	
@@ -33,7 +34,7 @@ public class Tank_man extends Material{
 	 * @param img_y 模型在图集的y轴位置
 	 * @param material_x 模型在地图出生的x轴位置
 	 * @param material_y 模型在地图出生的y轴位置
-	 * @param logo 窗口图标
+	 * @param refurbish 窗口图标
 	 */
 	public Tank_man(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
@@ -52,7 +53,7 @@ public class Tank_man extends Material{
 	public void setDie(boolean die) {
 		this.die = die;
 	}
-	
+	//确保模型显示在地图中
 	@Override
 	public void setMaterial_x(int material_x) {
 		if (material_x <= Data.TANKE_REGION_MIN_X){
@@ -242,8 +243,8 @@ public class Tank_man extends Material{
 		}
 		moveJudge();
 	}
-		
-	private void moveJudge() {		//碰撞检测
+	//碰撞检测	
+	private void moveJudge() {		
 		for (Material mat : Data.matarry) {
 			if (mat != this){
 				if (temp_x == 1){
@@ -290,7 +291,7 @@ public class Tank_man extends Material{
 			}
 		}
 	}
-		
+	//方向方法	
 	public void downKey(int num){
 		if (num == 0){
 			take_up = true;

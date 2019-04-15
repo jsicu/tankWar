@@ -2,9 +2,15 @@ package com.young.tank;
 
 import java.awt.Graphics;
 
+/**
+ * @author linzhongqi
+ * @data 2019年3月18日
+ * 封面操作类
+ * 
+ */
 public class GameStart {
-	
-	private static int start_id;		//封面进入id
+	//封面进入id
+	private static int start_id;		
 	private static int fps = 0;
 	
 	public GameStart() {

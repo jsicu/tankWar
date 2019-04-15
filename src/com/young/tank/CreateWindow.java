@@ -45,13 +45,13 @@ public class CreateWindow extends JFrame{
 		this.fps = fps;
 		this.logo = logo;
 		createJFrame();
-//		frame.requestFocus();  //JPanel要响应键盘事件，必须设置焦点
 	}
 	
 	private final void createJFrame(){
-		setSize(width, height);		//窗口大小
-		setLocation(350, 100);		//窗口位置
-		
+		//窗口大小
+		setSize(width, height);		
+		//窗口位置
+		setLocation(350, 100);		
 		final CreateCanvas cc = new CreateCanvas();
 		add(cc);
 		setResizable(false);
@@ -81,7 +81,6 @@ public class CreateWindow extends JFrame{
 				if (Data.start == 3){
 					GameStart.anew(n);
 				}
-				
 				cc.repaint();
 			}
 			
@@ -100,13 +99,14 @@ public class CreateWindow extends JFrame{
 			public void keyReleased(KeyEvent e) {
 				// TODO 自动生成的方法存根
 				if (Data.start == 1){
-					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
+					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
+					if (e.getKeyCode() == KeyEvent.VK_UP){
 						((Tank_man)(Data.mat)).upKey(0);
-					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
 						((Tank_man)(Data.mat)).upKey(1);
-					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
 						((Tank_man)(Data.mat)).upKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 						((Tank_man)(Data.mat)).upKey(3);
 					}
 				}
@@ -120,15 +120,16 @@ public class CreateWindow extends JFrame{
 //			开火键 --> F键-VK_F
 			//按下某个键时调用此方法。
 			public void keyPressed(KeyEvent e) {
-				// TODO 自动生成的方法存根
-				if (Data.start == 1){ //单机模式
-					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
+				//单机模式
+				if (Data.start == 1){ 
+					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
+					if (e.getKeyCode() == KeyEvent.VK_UP){ 
 						((Tank_man)(Data.mat)).downKey(0);
-					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
 						((Tank_man)(Data.mat)).downKey(1);
-					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
 						((Tank_man)(Data.mat)).downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 						((Tank_man)(Data.mat)).downKey(3);
 					}
 					//按下F键发射炮弹
@@ -138,19 +139,23 @@ public class CreateWindow extends JFrame{
 					//退出按键
 					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 						Data.matarry.clear();
-						TankOther.myTank = 4;			//返回封面，重置数量
+						//返回封面，重置数量
+						TankOther.myTank = 4;			
 						TankOther.enemySum = 20;
-						new AudioPlay().stop();			//关闭音乐
+						//关闭音乐
+						new AudioPlay().stop();			
 						Data.start = 3;
 					}
-				}else if (Data.start == 2){ //设置地图
-					if (e.getKeyCode() == KeyEvent.VK_UP){ //getKeyCode 返回与此事件中的键关联的整数 keyCode。//38上
+				}//设置地图
+				else if (Data.start == 2){ 
+					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
+					if (e.getKeyCode() == KeyEvent.VK_UP){
 						Data.create_map.downKey(0);
-					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){//40 下
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
 						Data.create_map.downKey(1);
-					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){//37左
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
 						Data.create_map.downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){//39右
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 						Data.create_map.downKey(3);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_S){
@@ -165,8 +170,9 @@ public class CreateWindow extends JFrame{
 					if (e.getKeyCode() == KeyEvent.VK_Y){
 						Data.create_map.downKey(7);
 					}
-
-				}else if (Data.start == 3){ //游戏开始页面
+				}
+				//游戏开始页面
+				else if (Data.start == 3){ 
 //					进入 回车键-VK_ENTER
 //					选择 A键-VK_A
 					if (e.getKeyCode() == KeyEvent.VK_ENTER){

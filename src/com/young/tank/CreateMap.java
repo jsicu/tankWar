@@ -27,7 +27,7 @@ public class CreateMap {
 	
 	
 	public CreateMap() {
-//		super();
+		super();
 		Data.matarry.clear();
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		for (int i = 0; i < 8; i++) {
@@ -60,7 +60,7 @@ public class CreateMap {
 //					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
 		}
 	}
-	
+	//设置地图，按键按下事件
 	public void downKey(int num){
 		if (num == 0){
 			material_y -= 32;
@@ -110,8 +110,7 @@ public class CreateMap {
 			}else {
 				selectMaterial();
 			}
-			
-			
+						
 			down_key = true;
 			
 		}else if (num == 6){
