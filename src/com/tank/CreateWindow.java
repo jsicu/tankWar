@@ -72,9 +72,12 @@ public class CreateWindow extends JFrame{
 					n = 0;
 				}
 				if (Data.start == 1){
+					System.out.println("actionPerformed() => "+"=====================");
 					TankOther.newtank();
 				}
+				
 				for (Material mat : Data.matarry) {
+					System.out.println("actionPerformed() => "+ Data.matarry);
 					mat.anew(n);
 				}
 				

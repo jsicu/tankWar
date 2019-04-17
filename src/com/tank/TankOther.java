@@ -52,17 +52,20 @@ public class TankOther {
 	}
 	//添加坦克
 	public static void newtank(){
-		int temp = 0;
+		int temp = 0;		//场上敌方坦克数
 		int temp_1 = 0;
-		int temp1 = 0;
+		int temp1 = 0;		//场上我方坦克数
 		for (Material mat : Data.matarry) {
 			if (mat instanceof Tank_npc){
 				temp++;
+//				System.out.println("newtank() => "+Data.matarry);
+//				System.out.println("newtank().temp => "+temp);
 			}
 			if (mat instanceof Tank_man){
 				temp1++;
 			}
 		}
+		
 		//我方坦克复活
 		if (temp1 <= 0){
 			if (myTank > 0){
