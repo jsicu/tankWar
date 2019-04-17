@@ -14,15 +14,11 @@ public class TankOther {
 	public static int enemySum = 20;		//敌人数
 	public static int myTank = 4;			//本方数
 	
-	
+	//抑制单类型的警告
 	@SuppressWarnings("unchecked")
 	public TankOther() {
 		super();
-		try {
-//			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.tmp"));
-//			oos.writeObject(Data.matarry);
-//			oos.close();
-				
+		try {;	
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
 				Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
 				ois.close();
@@ -52,7 +48,7 @@ public class TankOther {
 			}
 		}
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
-		new AudioPlay().play("src\\com\\young\\tank\\intro.wav");
+		new AudioPlay().play("bgmusic\\inter.wav");
 	}
 	//添加坦克
 	public static void newtank(){

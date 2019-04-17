@@ -14,7 +14,7 @@ import java.net.URL;
  */
 public class AudioPlay {
 	public static AudioClip clip;	
-	
+	/**音乐播放方法*/
 	public void play(final String path){
 		File file = new File(path); 
 		URL radio = null;
@@ -27,6 +27,7 @@ public class AudioPlay {
 		clip = Applet.newAudioClip(radio);
 		clip.play();
 	}
+	/**音乐循环播放方法*/
 	public void loop(String path){
 		File file = new File(path); 
 		URL radio = null;
@@ -39,7 +40,7 @@ public class AudioPlay {
 		clip = Applet.newAudioClip(radio);
 		clip.loop();
 	}
-	
+	/**音乐暂停方法*/
 	public void stop(){
 		clip.stop();
 	}
