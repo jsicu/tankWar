@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 
@@ -35,6 +35,7 @@ public class Tank_man extends Material{
 	 * @param material_x 模型在地图出生的x轴位置
 	 * @param material_y 模型在地图出生的y轴位置
 	 * @param refurbish 窗口图标
+	 * @param speed 我方移动速度
 	 */
 	public Tank_man(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
@@ -53,7 +54,7 @@ public class Tank_man extends Material{
 	public void setDie(boolean die) {
 		this.die = die;
 	}
-	//确保模型显示在地图中
+	//位置显示，确保模型显示在地图中
 	@Override
 	public void setMaterial_x(int material_x) {
 		if (material_x <= Data.TANKE_REGION_MIN_X){
@@ -89,6 +90,7 @@ public class Tank_man extends Material{
 	}
 	
 	@Override
+	//绘制我方坦克
 	public void anew(int fps) {
 		if (defend){
 			defend_time++;
@@ -309,7 +311,7 @@ public class Tank_man extends Material{
 	}
 	
 	private void directions() {
-		if (directions_x == 0 && directions_y == 0){
+//		if (directions_x == 0 && directions_y == 0){
 			if (take_up){
 				directions_x = 0;
 				directions_y = -3;
@@ -335,7 +337,7 @@ public class Tank_man extends Material{
 				temp_y = 0;
 				reviseXY(2);
 			}
-		}
+//		}
 	}
 
 	public void upKey(int num){

@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,16 +8,13 @@ import javax.swing.JPanel;
 
 public class CreateCanvas extends JPanel{
 
-	/**
-	 * Time:20170324
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		//填写指定的矩形
 		g.fillRect(Data.MIN_X, Data.MIN_Y, 416, 416);
-		
 		for (Material mat : Data.matarry) {
 			mat.draw(g, this);
 		}

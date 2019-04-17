@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,22 +21,16 @@ public class Data {
 	
 	public static CopyOnWriteArrayList<Material> matarry = new CopyOnWriteArrayList<Material>();
 	public static CreateMap create_map = new CreateMap();
-	public static TankOther tank_othe;
 	public static Material mat;
 	
 	public static final int TANKE_REGION_MIN_X = 0;				//坦克战斗区域
 	public static final int TANKE_REGION_MIN_Y = 0;				//坦克战斗区域
 	public static final int TANKE_REGION_MAX_X = 416;			//坦克战斗区域
 	public static final int TANKE_REGION_MAX_Y = 416;			//坦克战斗区域
-	public static final int MIN_X = 65;
+	public static final int MIN_X = 65;							//战斗区域起始位
 	public static final int MIN_Y = 35;
-	public static final int MAX_X = MIN_X + 416;
+	public static final int MAX_X = MIN_X + 416;				//战斗属性显示位
 	public static final int MAX_Y = MIN_Y + 416;
 	
-	
 	public static int start = 3;
-	public static int IMGE_x = 4;
-	public static int IMGE_y = 5;
-	public static int tank_x = 45;
-	public static int tank_y = 35;
 }

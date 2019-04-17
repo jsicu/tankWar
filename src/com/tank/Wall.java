@@ -1,7 +1,12 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 
+/**
+ * @author linzhongqi
+ * @data 2019年3月18日
+ * 制造墙类
+ */
 public class Wall extends Material{
 	private static final long serialVersionUID = 7273384988167714846L;
 //墙

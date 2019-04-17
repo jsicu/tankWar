@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 import java.io.FileOutputStream;			//字节输出流，用于输出地图文件
@@ -14,7 +14,7 @@ public class CreateMap {
 	public int img_y = 11;
 	public int material_x;
 	public int material_y;
-	public int refurbish = 1;
+	public int refurbish = 100;
 	public int imgid = 1;
 	public int size_x = 32;		//默认尺寸32
 	public int size_y = 32;
@@ -32,6 +32,7 @@ public class CreateMap {
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 6; j++) {
+				//掏出基地位置
 				if (i >= 2 && j >= 2 && i < 6){
 					continue;
 				}
@@ -56,8 +57,8 @@ public class CreateMap {
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * img_x + 1, 34 * img_y + 1, 34 * (img_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
 		}else {
-//			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-//					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
 		}
 	}
 	//设置地图，按键按下事件

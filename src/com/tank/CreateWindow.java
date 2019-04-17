@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.applet.AudioClip;
 import java.awt.Color;
@@ -48,6 +48,7 @@ public class CreateWindow extends JFrame{
 	}
 	
 	private final void createJFrame(){
+		
 		//窗口大小
 		setSize(width, height);		
 		//窗口位置
@@ -65,6 +66,7 @@ public class CreateWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				n++;
 				if (n >= fps * 100){
 					n = 0;
@@ -75,6 +77,7 @@ public class CreateWindow extends JFrame{
 				for (Material mat : Data.matarry) {
 					mat.anew(n);
 				}
+				
 				if(Data.start == 2){
 					Data.create_map.anew(n);
 				}

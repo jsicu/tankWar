@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 public class Move {
 	

@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 import java.io.Serializable;

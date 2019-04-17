@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Graphics;
 
@@ -26,11 +26,11 @@ public class GameStart {
 		}else if (i == 6){
 			if (start_id == 2){
 				Data.matarry.clear();
-				new CreateMap();
+				new CreateMap();		//自定义地图
 				Data.start = 2;
 			}else if (start_id == 0){
 				Data.matarry.clear();
-				new TankOther();		//背景地图绘制
+				new TankOther();		//战场地图绘制
 				Data.start = 1;
 			}
 		}

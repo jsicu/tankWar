@@ -1,4 +1,4 @@
-package com.young.tank;
+package com.tank;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,10 +9,8 @@ import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TankOther {
-	private static int fps;
-	private static int fps_1;
-	private static int rand = 1;
-	private static int rand_1 = 1;
+	private static int enemy_random = 1;	//敌方坦克出生随机数
+	private static int birth_random = 1;	//我方坦克出生随机数
 	public static int enemySum = 20;		//敌人数
 	public static int myTank = 4;			//本方数
 	
@@ -61,11 +59,6 @@ public class TankOther {
 		int temp = 0;
 		int temp_1 = 0;
 		int temp1 = 0;
-		fps++;
-		fps_1++;
-		if (fps >= 10000){
-			fps = 0;
-		}
 		for (Material mat : Data.matarry) {
 			if (mat instanceof Tank_npc){
 				temp++;
@@ -74,27 +67,26 @@ public class TankOther {
 				temp1++;
 			}
 		}
-//		System.out.println(temp1);
+		//我方坦克复活
 		if (temp1 <= 0){
 			if (myTank > 0){
-				if (fps_1 % rand_1 == 0){
+				if (birth_random == 1){
 					myTank--;
-					rand_1 = new Random().nextInt(50) + 100;
 					//坦克出现的位置
-					Data.mat = new Tank_man(0, 8, 128, 384, 3, 1, 3);
+					Data.mat = new Tank_man(0, 8, 128, 384, 3, 1, 1);
 					Data.matarry.add(0 ,Data.mat);
 				}
+				//获取0-100随机数，让坦克死亡后不至于里面出现
+				birth_random = new Random().nextInt(100);
 			}
-		}else {
-			fps_1 = 1;
 		}
-		
+		//敌方坦克复活
 		if (enemySum > 0){
 			if (temp < 4){
-				if (fps % rand == 0){
+				if (enemy_random == 1){
 					enemySum--;
-					rand = new Random().nextInt(50) + 100;
 					temp_1 = new Random().nextInt(3);
+					//复活地方
 					if (temp_1 == 0){
 						Data.matarry.add(0, new Tank_npc(0, 2, 192, 0, 3, 6, 5));					
 					}else if (temp_1 == 1){
@@ -103,12 +95,12 @@ public class TankOther {
 						Data.matarry.add(0, new Tank_npc(0, 2, 0, 0, 3, 8, 5));
 					}
 				}
+				//获取0-100随机数，让坦克死亡后不至于里面出现
+				enemy_random = new Random().nextInt(100);
 			}
-		}else {
-			fps = 0;
 		}
 	}
-	
+	//绘制对战状态
 	public static void draw(Graphics g, CreateCanvas cc) {
 		for (int i = 0; i <= enemySum / 2; i++) {
 			if (i == enemySum / 2&& enemySum % 2 == 1){
