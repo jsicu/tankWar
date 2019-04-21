@@ -1,7 +1,5 @@
 package com.tank;
 
-import java.applet.AudioClip;
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -72,12 +70,10 @@ public class CreateWindow extends JFrame{
 					n = 0;
 				}
 				if (Data.start == 1){
-					System.out.println("actionPerformed() => "+"=====================");
 					TankOther.newtank();
 				}
 				
 				for (Material mat : Data.matarry) {
-					System.out.println("actionPerformed() => "+ Data.matarry);
 					mat.anew(n);
 				}
 				

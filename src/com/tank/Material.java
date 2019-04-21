@@ -2,7 +2,12 @@ package com.tank;
 
 import java.awt.Graphics;
 import java.io.Serializable;
-
+/**
+ * @author linzhongqi
+ * @data 2019年3月16日
+ * 抽象类
+ * 
+ */
 public abstract class Material implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public int img_x;
@@ -58,14 +63,14 @@ public abstract class Material implements Serializable{
 	public void setRefurbish(int refurbish) {
 		this.refurbish = refurbish;
 	}
-	
+	/**x轴出界判断抽象方法*/
 	public abstract void setMaterial_x(int material_x);
-	
+	/**y轴出界判断抽象方法*/
 	public abstract void setMaterial_y(int material_y);
-	
+	/**imgid设置抽象方法*/
 	public abstract void anew(int fps);
-	
+	/**模型绘制抽象方法*/
 	public abstract void draw(Graphics g, CreateCanvas cc);
-	
+	/**碰撞效果处理抽象方法*/
 	public abstract void wounded(Bullet bullet, int principal, int directions, int num);
 }

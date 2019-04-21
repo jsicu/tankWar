@@ -128,7 +128,7 @@ public class Tank_npc extends Material{
 		}
 		
 	}
-
+	/**敌方坦克出生效果*/
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
@@ -305,25 +305,25 @@ public class Tank_npc extends Material{
 				directions_y = -3;
 				temp_x = 0;
 				temp_y = -1;
-				reviseXY(1);
+//				reviseXY(1);
 			}else if (take_down){
 				directions_x = 0;
 				directions_y = 3;
 				temp_x = 0;
 				temp_y = 1;
-				reviseXY(1);
+//				reviseXY(1);
 			}else if (take_left){
 				directions_x = -3;
 				directions_y = 0;
 				temp_x = -1;
 				temp_y = 0;
-				reviseXY(2);
+//				reviseXY(2);
 			}else if (take_right){
 				directions_x = 3;
 				directions_y = 0;
 				temp_x = 1;
 				temp_y = 0;
-				reviseXY(2);
+//				reviseXY(2);
 			}
 		}
 	}
@@ -423,7 +423,7 @@ public class Tank_npc extends Material{
 			}else{
 				Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 				Data.matarry.remove(this);
-				new AudioPlay().play("src\\com\\young\\tank\\kill.wav");//fire
+				new AudioPlay().play("bgmusic\\kill.wav");//fire
 			}
 		}
 	}

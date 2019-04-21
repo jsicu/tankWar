@@ -1,6 +1,7 @@
 package com.tank;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 //继承抽象类，就要实现里面的抽象方法
 public class Tank_man extends Material{
@@ -10,23 +11,23 @@ public class Tank_man extends Material{
 	private int directions_y = 0;
 	private int temp_x = 0;
 	private int temp_y = -1;
-	private int fps;
-	private int fps_1;
-	private int speed = 2;
-	private int attackspeed;
-	private int tempimg_x;
-	private int rank = 0;//等级
+	private int fps;			//移速、特效星图关联变量
+	private int fps_1;			//起始坦克无法移动变量
+	private int speed = 2;		//移动速度初值
+	private int attackspeed;	//子弹移动速度
+	private int tempimg_x;		//坦克等级显示模型
+	private int rank = 0;		//等级，道具用
 	private int enemy;
-	private int imgid_1;
-	private int imgid_2;
-	private int defend_time;
+	private int imgid_1;		//星图特效显示id
+	private int imgid_2;		//外围特效id
+	private int defend_time;	//无敌时间
 	
-	private boolean die;
+	private boolean die;			//死亡标志位
 	private boolean take_up;
 	private boolean take_down;
 	private boolean take_left;
 	private boolean take_right;
-	private boolean defend;
+	private boolean defend;			//无敌标志位
 	/**
 	 * 坦克模型及属性
 	 * 
@@ -34,7 +35,7 @@ public class Tank_man extends Material{
 	 * @param img_y 模型在图集的y轴位置
 	 * @param material_x 模型在地图出生的x轴位置
 	 * @param material_y 模型在地图出生的y轴位置
-	 * @param refurbish 窗口图标
+	 * @param refurbish 特效刷新速度
 	 * @param speed 我方移动速度
 	 */
 	public Tank_man(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
@@ -44,6 +45,7 @@ public class Tank_man extends Material{
 		
 		this.defend = true;
 		this.speed = speed;
+//		System.out.println("Tank_man() => "+enemy);
 		this.enemy = enemy;
 	}
 	
@@ -92,13 +94,14 @@ public class Tank_man extends Material{
 	@Override
 	//绘制我方坦克
 	public void anew(int fps) {
+		//出现特效id设定及无敌时间判定
 		if (defend){
 			defend_time++;
+			//无敌时间
 			if (defend_time >= Data.WINDOW_FPS * 4){
 				defend_time = 0;
 				defend = false;
 			}
-			
 			if (defend_time % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish * 0.25){
 				imgid_2 = 1;
 			}
@@ -108,19 +111,20 @@ public class Tank_man extends Material{
 			if (defend_time % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 0.75 && defend_time % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.5){
 				imgid_2 = 3;
 			}
-			if (defend_time % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 0.1 && defend_time % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.75){
+			if (defend_time % (Data.WINDOW_FPS / refurbish) >  Data.WINDOW_FPS / refurbish * 0.75){
 				imgid_2 = 4;
 			}
 		}
 		
 		
 		
-		//坦克移动 出现特效基数
+		//特效ID
 		this.fps++;
 		this.fps_1++;
 		if (this.fps >= 100000){
 			this.fps = 0;
 		}
+		//特效 
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
 			if (enemy <= 2){
 				if (directions_x == 0 ^ directions_y == 0){
@@ -140,36 +144,21 @@ public class Tank_man extends Material{
 					imgid = 0;
 				}
 			}
+			//坦克移动 
 			if (!die){
 				move();			
 			}
 		}else {
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish * 0.2){
-				imgid_1 = 2;
-			}
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 0.4 && fps_1 % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.2){
-				imgid_1 = 3;
-			}
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 0.6 && fps_1 % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.4){
-				imgid_1 = 4;
-			}
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 0.8 && fps_1 % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.6){
-				imgid_1 = 3;
-			}
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 1.0 && fps_1 % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 0.8){
-				imgid_1 = 2;
-			}
-			if (fps_1 % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish * 1.2 && fps_1 % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish * 1.0){
-				imgid_1 = 1;
-			}
+			//星图特效显示，取10余数，图切换会慢
+			imgid_1 = fps % 10;
 		}
-		
 	}
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
 		tempimg_x = rank * 8 + img_x;
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
+			//上模型
 			if (temp_y == -1){
 				if (imgid == 1){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
@@ -178,6 +167,7 @@ public class Tank_man extends Material{
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 							34 * (tempimg_x + 1) + 1, 34 * img_y + 1, 34 * (tempimg_x + 2) - 1, 34 * (img_y + 1) - 1, cc);
 				}
+			//右模型
 			} else if (temp_x == 1){
 				if (imgid == 1){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
@@ -187,6 +177,7 @@ public class Tank_man extends Material{
 							34 * (tempimg_x + 3) + 1, 34 * img_y + 1, 34 * (tempimg_x + 4) - 1, 34 * (img_y + 1) - 1, cc);
 				}
 			} else if (temp_y == 1){
+				//下模型
 				if (imgid == 1){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 							34 * (tempimg_x + 4) + 1, 34 * img_y + 1, 34 * (tempimg_x + 5) - 1, 34 * (img_y + 1) - 1, cc);
@@ -194,6 +185,7 @@ public class Tank_man extends Material{
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 							34 * (tempimg_x + 5) + 1, 34 * img_y + 1, 34 * (tempimg_x + 6) - 1, 34 * (img_y + 1) - 1, cc);
 				}
+				//左模型
 			}else if (temp_x == -1){
 				if (imgid == 1){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
@@ -204,21 +196,22 @@ public class Tank_man extends Material{
 				}
 			}
 		}else{
+			//坦克未出现是的星图
 			if (imgid_1 == 1){
 				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 						34 * 19 + 1, 34 * 4 + 1, 34 * 20 - 1, 34 * 5 - 1, cc);
 			}else if (imgid_1 == 2){
 				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-				34 * 18 + 1, 34 * 4 + 1, 34 * 19 - 1, 34 * 5 - 1, cc);
+						34 * 18 + 1, 34 * 4 + 1, 34 * 19 - 1, 34 * 5 - 1, cc);
 			}else if (imgid_1 == 3){
 				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-				34 * 17 + 1, 34 * 4 + 1, 34 * 18 - 1, 34 * 5 - 1, cc);
+						34 * 17 + 1, 34 * 4 + 1, 34 * 18 - 1, 34 * 5 - 1, cc);
 			}else if (imgid_1 == 4){
 				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-				34 * 16 + 1, 34 * 4 + 1, 34 * 17 - 1, 34 * 5 - 1, cc);
+						34 * 16 + 1, 34 * 4 + 1, 34 * 17 - 1, 34 * 5 - 1, cc);
 			}
 		}
-		
+		//出生特效
 		if (defend){
 			if (imgid_2 == 1){
 				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
@@ -309,7 +302,7 @@ public class Tank_man extends Material{
 		}
 //		System.out.println(directions_x + "..." + directions_x);
 	}
-	
+	/**方向*/
 	private void directions() {
 //		if (directions_x == 0 && directions_y == 0){
 			if (take_up){
@@ -317,25 +310,25 @@ public class Tank_man extends Material{
 				directions_y = -3;
 				temp_x = 0;
 				temp_y = -1;
-				reviseXY(1);
+//				reviseXY(1);
 			}else if (take_down){
 				directions_x = 0;
 				directions_y = 3;
 				temp_x = 0;
 				temp_y = 1;
-				reviseXY(1);
+//				reviseXY(1);
 			}else if (take_left){
 				directions_x = -3;
 				directions_y = 0;
 				temp_x = -1;
 				temp_y = 0;
-				reviseXY(2);
+//				reviseXY(2);
 			}else if (take_right){
 				directions_x = 3;
 				directions_y = 0;
 				temp_x = 1;
 				temp_y = 0;
-				reviseXY(2);
+//				reviseXY(2);
 			}
 //		}
 	}
@@ -364,18 +357,21 @@ public class Tank_man extends Material{
 //			directions_y = 0;
 //		}
 	}
-	
-	private void reviseXY(int num){		//不移动坐标校正
+	//不移动坐标校正
+	private void reviseXY(int num){		
 		if (num == 1){
 			if (material_x % 16 < 8){
 				material_x = material_x / 16 * 16;
 			}else if (material_x % 16 >= 9){
+//				System.out.println("reviseXY() x => "+material_x % 16);
 				material_x = material_x / 16 * 16 + 16;
 			}
 		}else if (num == 2){
+			
 			if (material_y % 16 < 8){
 				material_y = material_y / 16 * 16;
 			}else if (material_y % 16 >= 9){
+				System.out.println("reviseXY() y => "+material_y / 16);
 				material_y = material_y / 16 * 16 + 16;
 			}
 		}
@@ -384,11 +380,12 @@ public class Tank_man extends Material{
 	public void attack(){
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
 			if (!die){
+				//存在子弹数量
 				int bullet_coumt = 0;
 				int bullet_sum = 0;
 				if (rank == 0){
 					attackspeed = 4;
-					bullet_sum = 1;
+					bullet_sum = 1;		
 				}else if (rank == 1){
 					attackspeed = 6;
 					bullet_sum = 1;
@@ -396,7 +393,6 @@ public class Tank_man extends Material{
 					attackspeed = 6;
 					bullet_sum = 2;
 				}
-//		attackspeed = 1;
 				for (Material mat : Data.matarry) {
 					if (mat instanceof Bullet){
 						if (((Bullet)(mat)).getPrincipal() == enemy){
@@ -404,8 +400,9 @@ public class Tank_man extends Material{
 						}				
 					}
 				}
+				//判断存在子弹是不是超限
 				if (bullet_sum > bullet_coumt){
-					
+					//绘制不同方向子弹
 					if (temp_y == -1){
 						Data.matarry.add(new Bullet(0, 5, material_x + 12, material_y, attackspeed, enemy, 1));
 					} else if (temp_x == 1){
@@ -432,6 +429,7 @@ public class Tank_man extends Material{
 			}else if (dire == 4){
 				Data.matarry.add(new Effect(20, 4, material_x + 16, material_y  + (num - 2) * 16, 12, 22));
 			}
+			//不无敌
 			if (!defend){
 				if (rank - 1 >= 0){
 					rank = rank - 1;
@@ -440,10 +438,10 @@ public class Tank_man extends Material{
 					Data.matarry.remove(this);
 					die = true;
 					if (TankOther.myTank <= 0){
-						new AudioPlay().play("src\\com\\young\\tank\\gameOver.wav");
+						new AudioPlay().play("bgmusic\\gameOver.wav");
 						Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 					}
-					new AudioPlay().play("src\\com\\young\\tank\\kill.wav");//fire
+					new AudioPlay().play("bgmusic\\kill.wav");//fire
 				}
 			}
 		}

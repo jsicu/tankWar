@@ -6,9 +6,8 @@ public class Effect extends Material{//子弹特效
 	private static final long serialVersionUID = 3402035641659328509L;
 	
 	int fps;
-	int num1;
-	int num2;
-	int m;
+	int num1;		//坦克状态值1（4：游戏结束）
+	int num2;		//坦克状态值1
 	
 	
 	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish, int num) {
@@ -20,10 +19,10 @@ public class Effect extends Material{//子弹特效
 		super.ispass = true;
 	}
 
-	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish) {
-		super(img_x, img_y, material_x, material_y, refurbish);
-		// TODO 自动生成的构造函数存根
-	}
+//	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish) {
+//		super(img_x, img_y, material_x, material_y, refurbish);
+//		// TODO 自动生成的构造函数存根
+//	}
 
 	@Override
 	public void setMaterial_x(int material_x) {
@@ -39,10 +38,6 @@ public class Effect extends Material{//子弹特效
 
 	@Override
 	public void anew(int fps) {
-//		if (m == 0){
-//			m = fps;
-//		}
-//		this.fps = fps - m;
 		this.fps++;
 		if (this.fps % (Data.WINDOW_FPS / refurbish  * 2.5) <= Data.WINDOW_FPS / refurbish * 0.5){
 			imgid = 1;

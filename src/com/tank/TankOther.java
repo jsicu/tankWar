@@ -58,8 +58,6 @@ public class TankOther {
 		for (Material mat : Data.matarry) {
 			if (mat instanceof Tank_npc){
 				temp++;
-//				System.out.println("newtank() => "+Data.matarry);
-//				System.out.println("newtank().temp => "+temp);
 			}
 			if (mat instanceof Tank_man){
 				temp1++;

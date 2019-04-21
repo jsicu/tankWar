@@ -15,10 +15,21 @@ public class Bullet extends Material{	//子弹
 	public void setPrincipal(int principal) {
 		this.principal = principal;
 	}
-	
+	/**
+	 * 坦克模型及属性
+	 * 
+	 * @param img_x 模型在图集的x轴位置
+	 * @param img_y 模型在图集的y轴位置
+	 * @param material_x 模型在地图出生的x轴位置
+	 * @param material_y 模型在地图出生的y轴位置
+	 * @param refurbish 特效刷新速度
+	 * @param principal 子弹归属
+	 * @param direction 子弹方向
+	 */
 	public Bullet(int img_x, int img_y, int material_x, int material_y, int refurbish, int principal, int direction) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		this.principal = principal;
+//		System.out.println("getPrincipal() => "+principal);
 		this.direction = direction;
 		super.size_x = 8;
 		super.size_y = 8;
@@ -26,7 +37,7 @@ public class Bullet extends Material{	//子弹
 		super.attack_id = 5;
 		super.ispenetrate = false;
 		if (principal <= 2){
-			new AudioPlay().play("src\\com\\young\\tank\\shoot.wav");//fire	
+			new AudioPlay().play("bgmusic\\shoot.wav");	//fire	
 		}
 	}
 
@@ -35,10 +46,10 @@ public class Bullet extends Material{	//子弹
 	public void setMaterial_x(int material_x) {
 		if (material_x <= Data.TANKE_REGION_MIN_X){
 			this.material_x = Data.TANKE_REGION_MIN_X;
-			destroy1();
+			bulletOut();
 		}else if (material_x >= Data.TANKE_REGION_MAX_X - size_x){
 			this.material_x = Data.TANKE_REGION_MAX_X - size_x;
-			destroy1();
+			bulletOut();
 		}else{
 			this.material_x = material_x;
 		}
@@ -48,10 +59,10 @@ public class Bullet extends Material{	//子弹
 	public void setMaterial_y(int material_y) {
 		if (material_y <= Data.TANKE_REGION_MIN_Y){
 			this.material_y = Data.TANKE_REGION_MIN_Y;
-			destroy1();
+			bulletOut();
 		}else if (material_y >= Data.TANKE_REGION_MAX_Y - size_y){
 			this.material_y = Data.TANKE_REGION_MAX_Y - size_y;
-			destroy1();
+			bulletOut();
 		}else{
 			this.material_y = material_y;
 		}
@@ -60,20 +71,23 @@ public class Bullet extends Material{	//子弹
 	@Override
 	public void anew(int fps) {
 		this.fps = fps;
+		//向上发射
 		if (direction == 1){
 			imgid = 1;
 			move(0, -1);
+		//向下发射
 		}else if (direction == 2){
 			imgid = 2;
 			move(0, 1);
+		//向右发射
 		}else if (direction == 3){
 			imgid = 3;
 			move(1, 0);
+		//向左发射
 		}else if (direction == 4){
 			imgid = 4;
 			move(-1, 0);
 		}
-		
 	}
 
 	@Override
@@ -112,12 +126,12 @@ public class Bullet extends Material{	//子弹
 	}
 	
 	public void move(int x,int y){
-			setMaterial_x(getMaterial_x() + (x * refurbish));
-			setMaterial_y(getMaterial_y() + (y * refurbish));
-			moveJudge();
+		setMaterial_x(getMaterial_x() + (x * refurbish));
+		setMaterial_y(getMaterial_y() + (y * refurbish));
+		moveJudge();
 	}
 
-	public void destroy1(){//子弹出界
+	public void bulletOut(){//子弹出界
 		if (imgid == 1){
 			Data.matarry.add(new Effect(20, 4, material_x - 12, material_y - 16, 12, 22));
 		}else if (imgid == 2){
@@ -128,9 +142,9 @@ public class Bullet extends Material{	//子弹
 			Data.matarry.add(new Effect(20, 4, material_x - 16, material_y - 12, 12, 22));
 		}
 		if (principal <= 2){
-			new AudioPlay().play("src\\com\\young\\tank\\hit.wav");
+			new AudioPlay().play("bgmusic\\hit.wav");
 		}
-
+		//移除
 		Data.matarry.remove(this);
 	}
 	
@@ -153,6 +167,7 @@ public class Bullet extends Material{	//子弹
 									}else{
 										temp1 = 3;
 									}
+//									System.out.println("moveJudge() => "+mat);
 									mat.wounded(this,principal, imgid, temp1);
 //								}
 							}
@@ -168,6 +183,7 @@ public class Bullet extends Material{	//子弹
 									}else{
 										temp1 = 3;
 									}
+//									System.out.println("moveJudge() => "+mat);
 									mat.wounded(this,principal, imgid, temp1);
 //								}
 							}
@@ -183,6 +199,7 @@ public class Bullet extends Material{	//子弹
 									}else{
 										temp1 = 3;
 									}
+//									System.out.println("moveJudge() => "+mat);
 									mat.wounded(this,principal, imgid, temp1);
 //								}
 							}
@@ -198,6 +215,7 @@ public class Bullet extends Material{	//子弹
 									}else{
 										temp1 = 3;
 									}
+//									System.out.println("moveJudge() => "+mat);
 									mat.wounded(this,principal, imgid, temp1);
 //								}
 							}
@@ -212,7 +230,7 @@ public class Bullet extends Material{	//子弹
 	public void wounded(Bullet bullet, int principal, int dire, int num) {
 		Data.matarry.remove(bullet);
 		Data.matarry.remove(this);
-		new AudioPlay().play("src\\com\\young\\tank\\hit.wav");//fire
+		new AudioPlay().play("bgmusic\\hit.wav");//fire
 	}
 	
 }
