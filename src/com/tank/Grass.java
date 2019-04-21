@@ -1,12 +1,13 @@
 package com.tank;
 
 import java.awt.Graphics;
-
+/**
+ * @author linzhongqi
+ * @data 2019年3月18日
+ * 制造草类
+ */
 public class Grass extends Material{
 	private static final long serialVersionUID = -1606590867880040363L;
-
-//草
-	
 	
 	public Grass(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);

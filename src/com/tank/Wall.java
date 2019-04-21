@@ -11,12 +11,8 @@ public class Wall extends Material{
 	private static final long serialVersionUID = 7273384988167714846L;
 //ǽ
 	
-	
-	
 	private int temp_img_x;
 	private int temp_img_y;
-	
-	
 	
 	public Wall(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);

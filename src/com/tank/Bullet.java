@@ -1,7 +1,11 @@
 package com.tank;
 
 import java.awt.Graphics;
-
+/**
+ * @author linzhongqi
+ * @data 2019年3月22日
+ * 子弹类
+ */
 public class Bullet extends Material{	//子弹
 	private static final long serialVersionUID = -8469328198288631536L;
 	int principal;//子弹归属

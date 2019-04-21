@@ -1,7 +1,11 @@
 package com.tank;
 
 import java.awt.Graphics;
-
+/**
+ * @author linzhongqi
+ * @data 2019年3月11日
+ * 基地类
+ */
 public class Boss extends Material{
 	private static final long serialVersionUID = 1818992270089337283L;
 
@@ -48,8 +52,8 @@ public class Boss extends Material{
 				Data.matarry.add(new Effect(20, 4, material_x + 16, material_y  + (num - 2) * 16, 12, 22));
 			}
 			Data.matarry.remove(bullet);
-			new AudioPlay().play("src\\com\\young\\tank\\kill.wav");
-			new AudioPlay().play("src\\com\\young\\tank\\gameOver.wav");
+			new AudioPlay().play("bgmusic\\kill.wav");
+			new AudioPlay().play("bgmusic\\gameOver.wav");
 			Data.matarry.add(new Effect(20, 4, material_x, material_y, 6, 14));
 			Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 			((Tank_man)(Data.mat)).setDie(true);

@@ -34,7 +34,7 @@ public class CreateWindow extends JFrame{
 	 * @param width 窗口宽度
 	 * @param height 窗口高度
 	 * @param fps 每秒钟刷新次数
-	 * @param 
+	 * @param logo logo
 	 */
 	public CreateWindow(String title, int width, int height, int fps, Image logo) throws HeadlessException {
 		super(title);
