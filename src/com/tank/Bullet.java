@@ -27,7 +27,7 @@ public class Bullet extends Material{	//子弹
 	 * @param material_x 模型在地图出生的x轴位置
 	 * @param material_y 模型在地图出生的y轴位置
 	 * @param refurbish 特效刷新速度
-	 * @param principal 子弹归属
+	 * @param principal 子弹归属(我方：1，敌方：6、7、8)
 	 * @param direction 子弹方向
 	 */
 	public Bullet(int img_x, int img_y, int material_x, int material_y, int refurbish, int principal, int direction) {
@@ -96,42 +96,26 @@ public class Bullet extends Material{	//子弹
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
-		if (principal <= 2){
-			// TODO 自动生成的方法存根
-			if (imgid == 1){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X , material_y + 8 + Data.MIN_Y, 
-						34 * img_x , 34 * img_y + 1, 34 * (img_x + 1) - 26, 34 * (img_y + 1) - 25, cc);//上
-			}else if (imgid == 2){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * img_x + 10, 34 * img_y + 1, 34 * (img_x + 1) - 16, 34 * (img_y + 1) - 25, cc);//下
-			}else if (imgid == 3){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * img_x + 12, 34 * img_y + 10, 34 * (img_x + 1) - 14, 34 * (img_y + 1) - 16, cc);//左
-			}else if (imgid == 4){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * img_x + 1, 34 * img_y + 10, 34 * (img_x + 1) - 25, 34 * (img_y + 1) - 16, cc);//右
-			}
-		}else {
-			if (imgid == 1){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X , material_y + 8 + Data.MIN_Y, 
-						34 * (img_x + 1), 34 * img_y + 1, 34 * (img_x + 2) - 26, 34 * (img_y + 1) - 25, cc);//上
-			}else if (imgid == 2){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * (img_x + 1) + 10, 34 * img_y + 1, 34 * (img_x + 2) - 16, 34 * (img_y + 1) - 25, cc);//下
-			}else if (imgid == 3){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * (img_x + 1) + 12, 34 * img_y + 10, 34 * (img_x + 2) - 14, 34 * (img_y + 1) - 16, cc);//左
-			}else if (imgid == 4){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-						34 * (img_x + 1) + 1, 34 * img_y + 10, 34 * (img_x + 2) - 25, 34 * (img_y + 1) - 16, cc);//右
-			}
+		// 保证知道头的方向正确
+		if (imgid == 1){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X , material_y + 8 + Data.MIN_Y, 
+					34 * img_x , 34 * img_y + 1, 34 * (img_x + 1) - 26, 34 * (img_y + 1) - 25, cc);//上
+		}else if (imgid == 2){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
+					34 * img_x + 10, 34 * img_y + 1, 34 * (img_x + 1) - 16, 34 * (img_y + 1) - 25, cc);//下
+		}else if (imgid == 3){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
+					34 * img_x + 12, 34 * img_y + 10, 34 * (img_x + 1) - 14, 34 * (img_y + 1) - 16, cc);//左
+		}else if (imgid == 4){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
+					34 * img_x + 1, 34 * img_y + 10, 34 * (img_x + 1) - 25, 34 * (img_y + 1) - 16, cc);//右
 		}
-		
 	}
 	
 	public void move(int x,int y){
 		setMaterial_x(getMaterial_x() + (x * refurbish));
 		setMaterial_y(getMaterial_y() + (y * refurbish));
+		//道具和道具的碰撞检查
 		moveJudge();
 	}
 
@@ -156,8 +140,21 @@ public class Bullet extends Material{	//子弹
 		int temp1 = 0;
 		int temp_x = 8;
 		int temp_y = 8;
+		
 		for (Material mat : Data.matarry) {
-			if (((mat instanceof Tank_man && principal > 2) || (mat instanceof Tank_npc && principal <= 2)) || ((!(mat instanceof Tank_npc) && !(mat instanceof Tank_man)) && (mat != this))){//
+//			if (mat instanceof Tank_man && principal > 2) {
+//				System.out.println("moveJudge() => mat instanceof Tank_man && principal > 2  " + principal);
+//			}
+			if (mat instanceof Tank_npc) {
+				System.out.println("moveJudge() => "+mat);
+				System.out.println("moveJudge() => " + Data.matarry);
+			}
+//			if ((!(mat instanceof Tank_npc) && !(mat instanceof Tank_man)) && (mat != this)) {
+//				System.out.println("moveJudge() => (!(mat instanceof Tank_npc) && !(mat instanceof Tank_man)) && (mat != this)");
+//			}
+			// 子弹碰到敌方坦克并子弹属于我方 || 子弹碰到我方坦克并子弹属于敌方
+			if (((mat instanceof Tank_man && principal > 2) || (mat instanceof Tank_npc && principal <= 2)) || ((!(mat instanceof Tank_npc) && !(mat instanceof Tank_man)) && (mat != this))){
+				//子弹是否可穿过
 				if (!mat.ispenetrate){
 //					System.out.println(mat.getClass());
 					if (imgid == 1){

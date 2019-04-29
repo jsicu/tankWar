@@ -55,6 +55,7 @@ public class Tank_man extends Material{
 	
 	public void setDie(boolean die) {
 		this.die = die;
+		System.out.println("setDie() => "+this.die);
 	}
 	//位置显示，确保模型显示在地图中
 	@Override
@@ -157,58 +158,61 @@ public class Tank_man extends Material{
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
 		tempimg_x = rank * 8 + img_x;
-		if (fps_1 > Data.WINDOW_FPS * 0.6){
-			//上模型
-			if (temp_y == -1){
-				if (imgid == 1){
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * tempimg_x + 1, 34 * img_y + 1, 34 * (tempimg_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
-				}else {
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 1) + 1, 34 * img_y + 1, 34 * (tempimg_x + 2) - 1, 34 * (img_y + 1) - 1, cc);
+		//若游戏结束，我方坦克不在绘制
+		if (!die) {
+			if (fps_1 > Data.WINDOW_FPS * 0.6){	
+				//上模型
+				if (temp_y == -1){
+//					if (imgid == 1){
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * tempimg_x + 1, 34 * img_y + 1, 34 * (tempimg_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
+//					}else {
+//						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+//								34 * (tempimg_x + 1) + 1, 34 * img_y + 1, 34 * (tempimg_x + 2) - 1, 34 * (img_y + 1) - 1, cc);
+//					}
+				//右模型
+				} else if (temp_x == 1){
+					if (imgid == 1){
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 2) + 1, 34 * img_y + 1, 34 * (tempimg_x + 3) - 1, 34 * (img_y + 1) - 1, cc);
+					}else {
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 3) + 1, 34 * img_y + 1, 34 * (tempimg_x + 4) - 1, 34 * (img_y + 1) - 1, cc);
+					}
+				} else if (temp_y == 1){
+					//下模型
+					if (imgid == 1){
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 4) + 1, 34 * img_y + 1, 34 * (tempimg_x + 5) - 1, 34 * (img_y + 1) - 1, cc);
+					}else {
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 5) + 1, 34 * img_y + 1, 34 * (tempimg_x + 6) - 1, 34 * (img_y + 1) - 1, cc);
+					}
+					//左模型
+				}else if (temp_x == -1){
+					if (imgid == 1){
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 6) + 1, 34 * img_y + 1, 34 * (tempimg_x + 7) - 1, 34 * (img_y + 1) - 1, cc);
+					}else {
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 7) + 1, 34 * img_y + 1, 34 * (tempimg_x + 8) - 1, 34 * (img_y + 1) - 1, cc);
+					}
 				}
-			//右模型
-			} else if (temp_x == 1){
-				if (imgid == 1){
+			}else{
+				//坦克未出现是的星图
+				if (imgid_1 == 1){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 2) + 1, 34 * img_y + 1, 34 * (tempimg_x + 3) - 1, 34 * (img_y + 1) - 1, cc);
-				}else {
+							34 * 19 + 1, 34 * 4 + 1, 34 * 20 - 1, 34 * 5 - 1, cc);
+				}else if (imgid_1 == 2){
 					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 3) + 1, 34 * img_y + 1, 34 * (tempimg_x + 4) - 1, 34 * (img_y + 1) - 1, cc);
+							34 * 18 + 1, 34 * 4 + 1, 34 * 19 - 1, 34 * 5 - 1, cc);
+				}else if (imgid_1 == 3){
+					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+							34 * 17 + 1, 34 * 4 + 1, 34 * 18 - 1, 34 * 5 - 1, cc);
+				}else if (imgid_1 == 4){
+					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+							34 * 16 + 1, 34 * 4 + 1, 34 * 17 - 1, 34 * 5 - 1, cc);
 				}
-			} else if (temp_y == 1){
-				//下模型
-				if (imgid == 1){
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 4) + 1, 34 * img_y + 1, 34 * (tempimg_x + 5) - 1, 34 * (img_y + 1) - 1, cc);
-				}else {
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 5) + 1, 34 * img_y + 1, 34 * (tempimg_x + 6) - 1, 34 * (img_y + 1) - 1, cc);
-				}
-				//左模型
-			}else if (temp_x == -1){
-				if (imgid == 1){
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 6) + 1, 34 * img_y + 1, 34 * (tempimg_x + 7) - 1, 34 * (img_y + 1) - 1, cc);
-				}else {
-					g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-							34 * (tempimg_x + 7) + 1, 34 * img_y + 1, 34 * (tempimg_x + 8) - 1, 34 * (img_y + 1) - 1, cc);
-				}
-			}
-		}else{
-			//坦克未出现是的星图
-			if (imgid_1 == 1){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-						34 * 19 + 1, 34 * 4 + 1, 34 * 20 - 1, 34 * 5 - 1, cc);
-			}else if (imgid_1 == 2){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-						34 * 18 + 1, 34 * 4 + 1, 34 * 19 - 1, 34 * 5 - 1, cc);
-			}else if (imgid_1 == 3){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-						34 * 17 + 1, 34 * 4 + 1, 34 * 18 - 1, 34 * 5 - 1, cc);
-			}else if (imgid_1 == 4){
-				g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-						34 * 16 + 1, 34 * 4 + 1, 34 * 17 - 1, 34 * 5 - 1, cc);
 			}
 		}
 		//出生特效
@@ -236,11 +240,14 @@ public class Tank_man extends Material{
 			setMaterial_x(getMaterial_x() + directions_x);
 			setMaterial_y(getMaterial_y() + directions_y);
 		}
+		//道具和我方坦克的碰撞检查
 		moveJudge();
 	}
-	//碰撞检测	
+	
+	/**碰撞检测*/	
 	private void moveJudge() {		
 		for (Material mat : Data.matarry) {
+//			System.out.println("moveJudge() => "+mat);
 			if (mat != this){
 				if (temp_x == 1){
 					if (!mat.ispass){

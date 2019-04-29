@@ -9,11 +9,13 @@ import java.awt.Graphics;
 public class Grass extends Material{
 	private static final long serialVersionUID = -1606590867880040363L;
 	
+	public boolean ispass;
 	public Grass(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
-		super.ispass = true;
+//		super.ispass = true;
 //		super.attack_id = 1;
-		super.ispenetrate = true;
+//		super.ispenetrate = true;
+		
 	}
 
 	@Override
@@ -41,7 +43,6 @@ public class Grass extends Material{
 	@Override
 	public void anew(int fps) {
 		// TODO 自动生成的方法存根
-		
 	}
 
 	@Override

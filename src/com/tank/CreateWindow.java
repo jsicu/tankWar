@@ -53,6 +53,7 @@ public class CreateWindow extends JFrame{
 		setLocation(350, 100);		
 		final CreateCanvas cc = new CreateCanvas();
 		add(cc);
+		//½ûÖ¹×î´ó»¯
 		setResizable(false);
 		setIconImage(logo);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

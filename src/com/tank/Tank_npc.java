@@ -189,6 +189,7 @@ public class Tank_npc extends Material{
 			setMaterial_x(getMaterial_x() + directions_x);
 			setMaterial_y(getMaterial_y() + directions_y);
 		}
+		//道具和敌方坦克的碰撞检查
 		moveJudge();
 		
 	}

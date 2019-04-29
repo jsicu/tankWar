@@ -16,8 +16,8 @@ public class Wall extends Material{
 	
 	public Wall(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
-		super.attack_id = 1;
-		super.ispenetrate = false;
+//		super.attack_id = 1;
+//		super.ispenetrate = false;
 		super.size_x = 8;
 		super.size_y = 8;
 	}

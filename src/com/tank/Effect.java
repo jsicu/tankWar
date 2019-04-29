@@ -13,11 +13,17 @@ public class Effect extends Material{//子弹特效
 	private int fps;
 	private int num1;			//坦克状态值1（4：游戏结束，3：击毁敌方，2：撞击道具，1：基地被摧毁）
 	private int num2 = 1;			//坦克状态值1（控制效果显示时间）
-	
+	public int die = 0;			//对外游戏结束标志
 	
 	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish, int num) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		this.num1 = num / 10;
+		//如果基地被毁，设置die
+		if (num1 == 4 ) {
+			System.out.println("Effect() => "+num1);
+			((Tank_man)(Data.mat)).setDie(true);
+		}
+		
 	}
 
 //	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish) {
@@ -61,8 +67,6 @@ public class Effect extends Material{//子弹特效
 	
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
-		System.out.println("draw() => "+imgid);
-		imgid = 1;
 		//基地被摧毁
 		if (num1 == 1){
 			//保证图标显示完全，不会立马消失
@@ -90,7 +94,7 @@ public class Effect extends Material{//子弹特效
 			}
 		//我方被摧毁
 		}else if(num1 == 4){
-			System.out.println("draw() => "+material_y);
+//			System.out.println("draw() => "+material_y);
 			gameover();
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 66 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * 4 + 1, 34 * img_y + 1, 34 * 6 - 1, 34 * (img_y + 1) - 1, cc);

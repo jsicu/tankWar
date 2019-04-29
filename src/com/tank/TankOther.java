@@ -18,7 +18,7 @@ public class TankOther {
 	@SuppressWarnings("unchecked")
 	public TankOther() {
 		super();
-		try {;	
+		try {	
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
 				Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
 				ois.close();
@@ -27,27 +27,35 @@ public class TankOther {
 				e1.printStackTrace();
 			}
 		System.out.println("TankOther()"+Data.matarry);
-		for (Material mat : Data.matarry) {
-			if (mat.material_x / 32 == 192 /32 && mat.material_y / 32 == 0 / 32){
-				Data.matarry.remove(mat);
-			}
-			if (mat.material_x / 32 == 384 /32 && mat.material_y / 32 == 0 / 32){
-				Data.matarry.remove(mat);
-			}
-			if (mat.material_x / 32 == 0 /32 && mat.material_y / 32 == 0 / 32){
-				Data.matarry.remove(mat);
-			}
-			if (mat.material_x / 32 == 128 /32 && mat.material_y / 32 == 384 / 32){
-				Data.matarry.remove(mat);
-			}
-			if (mat.material_x / 32 == 192 /32 && mat.material_y / 32 == 384 / 32){
-				Data.matarry.remove(mat);
-			}
-			if (mat.material_x / 32 == 256 /32 && mat.material_y / 32 == 384 / 32){
-				Data.matarry.remove(mat);
-			}
-		}
-		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
+//		for (Material mat : Data.matarry) {
+////			System.out.println("TankOther() => "+mat.material_x);
+//			// (6,0)
+//			if (mat.material_x / 32 == 192 /32 && mat.material_y / 32 == 0 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//			// (12,0)
+//			if (mat.material_x / 32 == 384 /32 && mat.material_y / 32 == 0 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//			// (0,0)
+//			if (mat.material_x / 32 == 0 /32 && mat.material_y / 32 == 0 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//			// (4,12)
+//			if (mat.material_x / 32 == 128 /32 && mat.material_y / 32 == 384 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//			// (6,12)
+//			if (mat.material_x / 32 == 192 /32 && mat.material_y / 32 == 384 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//			// (8,12)
+//			if (mat.material_x / 32 == 256 /32 && mat.material_y / 32 == 384 / 32){
+//				Data.matarry.remove(mat);
+//			}
+//		}
+//		System.out.println("TankOther()"+Data.matarry);
+//		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		new AudioPlay().play("bgmusic\\inter.wav");
 	}
 	//添加坦克
@@ -99,17 +107,28 @@ public class TankOther {
 	}
 	//绘制对战状态
 	public static void draw(Graphics g, CreateCanvas cc) {
-		for (int i = 0; i <= enemySum / 2; i++) {
-			if (i == enemySum / 2&& enemySum % 2 == 1){
-				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
+		for (int i = 0; i < enemySum; i++) {
+			int height = i / 2;
+			if (i % 2 == 1) {
+				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 52, Data.MIN_Y + height * 16, Data.MAX_X + 84, Data.MIN_Y + height * 16 + 32, 
 						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
-			}else if(i < enemySum / 2){
-				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
-						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
-				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 52, Data.MIN_Y + i * 16, Data.MAX_X + 84, Data.MIN_Y + i * 16 +32, 
-						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
+			} else {
+				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + height * 16, Data.MAX_X + 64, Data.MIN_Y + height * 16 + 32, 
+						34 * 1 + 1, 34 * 4 + 1, 34  * 2 - 1, 34 * 5 - 1, cc);
 			}
 		}
+//		for (int i = 0; i <= enemySum / 2; i++) {
+//			// 单数
+//			if (i == enemySum / 2 && enemySum % 2 == 1){
+//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
+//						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
+//			}else if(i < enemySum / 2){
+//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
+//						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
+//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 52, Data.MIN_Y + i * 16, Data.MAX_X + 84, Data.MIN_Y + i * 16 +32, 
+//						34 * 1 + 1, 34 * 4 + 1, 34  * 2 - 1, 34 * 5 - 1, cc);
+//			}
+//		}
 		g.drawImage(Data.TANK_PLAN, Data.MAX_X + 43, Data.MIN_Y + 230, Data.MAX_X + 75, Data.MIN_Y + 230 +32, 
 				34 * 2 + 1, 34 * 4 + 1, 34 * 3 - 1, 34 * 5 - 1, cc);
 		g.drawImage(Data.TANK_PLAN, Data.MAX_X + 36, Data.MIN_Y + 248, Data.MAX_X + 68, Data.MIN_Y + 248 +32, 

@@ -53,16 +53,17 @@ public class CreateMap {
 	}
 	
 	public void draw(Graphics g, CreateCanvas cc) {
-		if (imgid == 1){
+//		if (imgid == 1){
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * img_x + 1, 34 * img_y + 1, 34 * (img_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
-		}else {
-			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
-		}
+//		}else {
+//			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+//					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
+//		}
 	}
 	//设置地图，按键按下事件
 	public void downKey(int num){
+		//移动
 		if (num == 0){
 			material_y -= 32;
 			if (material_y <= 0){
@@ -97,10 +98,7 @@ public class CreateMap {
 			}else {
 				selectMaterial();
 			}
-			
-			
 			down_key = true;
-			
 		}else if (num == 5){
 			if (down_key){
 				select--;
@@ -110,16 +108,14 @@ public class CreateMap {
 				selectMaterial();
 			}else {
 				selectMaterial();
-			}
-						
+			}						
 			down_key = true;
-			
 		}else if (num == 6){
 			try {
-				//文本文件中写多个对象的信息（序列化）
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.tmp"));
-				oos.writeObject(Data.matarry);
-				oos.close();
+					//文本文件中写多个对象的信息（序列化）
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.tmp"));
+					oos.writeObject(Data.matarry);
+					oos.close();
 					System.out.println("已保存");
 //					ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
 //					Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
@@ -132,9 +128,7 @@ public class CreateMap {
 			new GameStart();
 			Data.start = 3;
 		}
-		
-		
-//		System.out.println(directions_x + "..." + directions_x);
+		System.out.println(select);
 	}
 	
 	public void selectMaterial(){
@@ -222,7 +216,7 @@ public class CreateMap {
 		
 		
 	}
-	
+	/**移除上一次的道具*/
 	public void DelMaterial(){
 		for (Material mat : Data.matarry) {
 			if (mat.material_x / 32 == material_x /32 && mat.material_y / 32 == material_y / 32){
