@@ -12,7 +12,7 @@ public class Effect extends Material{//子弹特效
 	
 	private int fps;
 	private int num1;			//坦克状态值1（4：游戏结束，3：击毁敌方，2：撞击道具，1：基地被摧毁）
-	private int num2 = 1;			//坦克状态值1（控制效果显示时间）
+	private int num2 = 1;		//坦克状态值1（控制效果显示时间）
 	public int die = 0;			//对外游戏结束标志
 	
 	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish, int num) {
@@ -113,7 +113,7 @@ public class Effect extends Material{//子弹特效
 		
 	}
 	
-	
+	//gameover图标
 	public void gameover(){
 		if (material_y >= Data.MAX_Y / 2 - 40){
 			material_y--;

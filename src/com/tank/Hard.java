@@ -41,7 +41,6 @@ public class Hard extends Material{
 
 	@Override
 	public void wounded(Bullet bullet, int principal, int directions, int num) {
-		
 		if (directions == 1){
 			Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y, 12, 22));
 		}else if (directions == 2){

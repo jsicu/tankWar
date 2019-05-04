@@ -16,7 +16,7 @@ public class Tank_npc extends Material{
 	private int speed = 2;
 	private int attackspeed;
 	private int tempimg_x;
-	private int rank = 0;//等级
+	private int rank = 0; //等级
 	private int enemy;
 	private int imgid_1;
 	
@@ -231,7 +231,7 @@ public class Tank_npc extends Material{
 			if (autoattack >= Data.WINDOW_FPS * 100){
 				autoattack = 0;
 			}
-			attack();
+//			attack();
 		}
 		
 	}

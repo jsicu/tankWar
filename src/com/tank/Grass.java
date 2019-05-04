@@ -12,10 +12,9 @@ public class Grass extends Material{
 	public boolean ispass;
 	public Grass(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
-//		super.ispass = true;
+		super.ispass = true;	
 //		super.attack_id = 1;
-//		super.ispenetrate = true;
-		
+		super.ispenetrate = true;
 	}
 
 	@Override
