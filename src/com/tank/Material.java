@@ -16,7 +16,7 @@ public abstract class Material implements Serializable{
 	public int material_y;
 	public int refurbish;
 	public int imgid = 0;
-	public int size_x = 32;		//默认尺寸32
+	public int size_x = 32;		//模型占据空间的大小，默认尺寸32
 	public int size_y = 32;
 	
 	public int attack_id;		//可被攻击子弹等级
@@ -72,5 +72,5 @@ public abstract class Material implements Serializable{
 	/**模型绘制抽象方法*/
 	public abstract void draw(Graphics g, CreateCanvas cc);
 	/**碰撞效果处理抽象方法*/
-	public abstract void wounded(Bullet bullet, int principal, int directions, int num);
+	public abstract void wounded(Bullet bullet, int principal, int directions, int effect_x, int effect_y);
 }

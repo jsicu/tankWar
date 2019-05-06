@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TankOther {
 	private static int enemy_random = 1;	//敌方坦克出生随机数
 	private static int birth_random = 1;	//我方坦克出生随机数
-	public static int enemySum = 20;		//敌人数
+	public static int enemySum = 6;		//敌人数
 	public static int myTank = 4;			//本方数
 	
 	//抑制单类型的警告
@@ -61,7 +61,7 @@ public class TankOther {
 	//添加坦克
 	public static void newtank(){
 		int temp = 0;		//场上敌方坦克数
-		int temp_1 = 0;
+		int temp_1 = 0;		//敌方坦克出生地随机数
 		int temp1 = 0;		//场上我方坦克数
 		for (Material mat : Data.matarry) {
 			if (mat instanceof Tank_npc){
@@ -117,18 +117,6 @@ public class TankOther {
 						34 * 1 + 1, 34 * 4 + 1, 34  * 2 - 1, 34 * 5 - 1, cc);
 			}
 		}
-//		for (int i = 0; i <= enemySum / 2; i++) {
-//			// 单数
-//			if (i == enemySum / 2 && enemySum % 2 == 1){
-//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
-//						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
-//			}else if(i < enemySum / 2){
-//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 32, Data.MIN_Y + i * 16, Data.MAX_X + 64, Data.MIN_Y + i * 16 + 32, 
-//						34 * 1 + 1, 34 * 4 + 1, 34 * 2 - 1, 34 * 5 - 1, cc);
-//				g.drawImage(Data.TANK_PLAN, Data.MAX_X + 52, Data.MIN_Y + i * 16, Data.MAX_X + 84, Data.MIN_Y + i * 16 +32, 
-//						34 * 1 + 1, 34 * 4 + 1, 34  * 2 - 1, 34 * 5 - 1, cc);
-//			}
-//		}
 		g.drawImage(Data.TANK_PLAN, Data.MAX_X + 43, Data.MIN_Y + 230, Data.MAX_X + 75, Data.MIN_Y + 230 +32, 
 				34 * 2 + 1, 34 * 4 + 1, 34 * 3 - 1, 34 * 5 - 1, cc);
 		g.drawImage(Data.TANK_PLAN, Data.MAX_X + 36, Data.MIN_Y + 248, Data.MAX_X + 68, Data.MIN_Y + 248 +32, 

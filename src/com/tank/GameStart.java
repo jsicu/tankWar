@@ -1,6 +1,8 @@
 package com.tank;
 
 import java.awt.Graphics;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /**
  * @author linzhongqi
@@ -12,9 +14,10 @@ public class GameStart {
 	//封面进入id
 	private static int start_id;		
 	private static int fps = 0;
+	private static Robot robot;
 	
 	public GameStart() {
-//		new AudioPlay().play("src\\com\\young\\tank\\hi.wav");
+		new AudioPlay().play("bgmusic\\hi.wav");
 	}
 
 	public static void downKey(int i) {
@@ -30,6 +33,12 @@ public class GameStart {
 				Data.start = 2;
 			}else if (start_id == 0){
 				Data.matarry.clear();
+				Data.style = true;		//双人模式
+				new TankOther();		//战场地图绘制
+				Data.start = 1;
+			}else if (start_id == 1){
+				Data.matarry.clear();
+				Data.style = false;		//单人模式
 				new TankOther();		//战场地图绘制
 				Data.start = 1;
 			}
@@ -38,7 +47,23 @@ public class GameStart {
 	}
 
 	public static void anew(int n) {
-		
+		if (Data.shiftNum != 0) {
+			try {
+				robot = new Robot();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+			// 切换输入法
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_SHIFT);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_SHIFT);
+			// 切换到英文模式
+			robot.keyPress(KeyEvent.VK_SHIFT);
+			robot.keyRelease(KeyEvent.VK_SHIFT);
+			Data.shiftNum--;
+		}
 	}
 
 	public static void draw(Graphics g, CreateCanvas createCanvas) {

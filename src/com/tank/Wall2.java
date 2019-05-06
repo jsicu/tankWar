@@ -105,11 +105,11 @@ public class Wall2 extends Material{
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire, int num) {
-		if (destroy(dire,num)){
-			Data.matarry.remove(bullet);
-			new AudioPlay().play("src\\com\\young\\tank\\brickErase.wav");
-		}
+	public void wounded(Bullet bullet, int principal, int dire, int effect_x, int effect_y) {
+//		if (destroy(dire,num)){
+//			Data.matarry.remove(bullet);
+//			new AudioPlay().play("src\\com\\young\\tank\\brickErase.wav");
+//		}
 	}
 	
 	public boolean destroy(int a,int b){

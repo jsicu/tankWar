@@ -31,7 +31,7 @@ public class Tank_npc extends Material{
 	public Tank_npc(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.attack_id = 1;
-		super.ispenetrate = true;
+		super.ispenetrate = false;
 		
 		this.fps_1 = 0;
 		this.speed = speed;
@@ -100,13 +100,13 @@ public class Tank_npc extends Material{
 				}
 			}
 			if (enemy > 2){
+				// 自动移动
 				automatamove();
-//			attack();
+//				attack();
 			}
-			
 			move();
-			super.ispenetrate = false;
 		}else {
+			//出身特效
 			if (fps_1 % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish * 0.2){
 				imgid_1 = 2;
 			}
@@ -191,7 +191,6 @@ public class Tank_npc extends Material{
 		}
 		//道具和敌方坦克的碰撞检查
 		moveJudge();
-		
 	}
 
 	public void automatamove(){
@@ -231,7 +230,7 @@ public class Tank_npc extends Material{
 			if (autoattack >= Data.WINDOW_FPS * 100){
 				autoattack = 0;
 			}
-//			attack();
+			attack();
 		}
 		
 	}
@@ -294,7 +293,6 @@ public class Tank_npc extends Material{
 		}else if (num == 3){
 			take_right = true;
 		}
-		
 		directions();
 //		System.out.println(directions_x + "..." + directions_x);
 	}
@@ -347,28 +345,23 @@ public class Tank_npc extends Material{
 			directions_x = 0;
 			directions_y = 0;
 		}
-		
-//		if (directions_x == x && directions_y == y){
-//			directions_x = 0;
-//			directions_y = 0;
-//		}
 	}
 	
-	private void reviseXY(int num){		//不移动坐标校正
-		if (num == 1){
-			if (material_x % 16 < 8){
-				material_x = material_x / 16 * 16;
-			}else if (material_x % 16 >= 9){
-				material_x = material_x / 16 * 16 + 16;
-			}
-		}else if (num == 2){
-			if (material_y % 16 < 8){
-				material_y = material_y / 16 * 16;
-			}else if (material_y % 16 >= 9){
-				material_y = material_y / 16 * 16 + 16;
-			}
-		}
-	}
+//	private void reviseXY(int num){		//不移动坐标校正
+//		if (num == 1){
+//			if (material_x % 16 < 8){
+//				material_x = material_x / 16 * 16;
+//			}else if (material_x % 16 >= 9){
+//				material_x = material_x / 16 * 16 + 16;
+//			}
+//		}else if (num == 2){
+//			if (material_y % 16 < 8){
+//				material_y = material_y / 16 * 16;
+//			}else if (material_y % 16 >= 9){
+//				material_y = material_y / 16 * 16 + 16;
+//			}
+//		}
+//	}
 	
 	public void attack(){
 		int bullet_coumt = 0;
@@ -392,7 +385,6 @@ public class Tank_npc extends Material{
 			}
 		}
 		if (bullet_sum > bullet_coumt){
-
 			if (temp_y == -1){
 				Data.matarry.add(new Bullet(0, 5, material_x + 12, material_y, attackspeed, enemy, 1));
 			} else if (temp_x == 1){
@@ -402,23 +394,20 @@ public class Tank_npc extends Material{
 			} else if (temp_x == -1){
 				Data.matarry.add(new Bullet(0, 5, material_x, material_y + 12, attackspeed, enemy, 4));
 			}
-		}
-		
+		}	
 	}
 
-	public void wounded(Bullet bullet, int principal, int dire , int num){
+	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
+		if(TankOther.enemySum <= 0 ) {
+			TankOther.enemySum--;
+		}
+//		System.out.println("wounded() => "+TankOther.enemySum);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
-			if (dire == 1){
-				Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y + 16, 12, 22));
-			}else if (dire == 2){
-				Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y - 16, 12, 22));
-			}else if (dire == 3){
-				Data.matarry.add(new Effect(20, 4, material_x - 16, material_y  + (num - 2) * 16, 12, 22));
-			}else if (dire == 4){
-				Data.matarry.add(new Effect(20, 4, material_x + 16, material_y  + (num - 2) * 16, 12, 22));
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
+			if (TankOther.enemySum == -4) {
+				Data.matarry.add(new Effect(0, 0, Data.MIN_X + 112, Data.MAX_Y, 12, 50));
 			}
-			
 			if (rank - 1 >= 0){
 				rank = rank - 1;
 			}else{

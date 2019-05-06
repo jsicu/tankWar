@@ -10,7 +10,6 @@ public class Bullet extends Material{	//子弹
 	private static final long serialVersionUID = -8469328198288631536L;
 	int principal;//子弹归属
 	int direction;
-	int fps;
 		
 	public int getPrincipal() {
 		return principal;
@@ -36,7 +35,7 @@ public class Bullet extends Material{	//子弹
 		this.direction = direction;
 		super.size_x = 6;
 		super.size_y = 8;
-		super.ispass = true;
+		super.ispass = true; // 设置子弹通过，否则敌方坦克打中敌方子弹会无法穿透
 		super.attack_id = 5;
 		super.ispenetrate = false;
 		if (principal <= 2){
@@ -73,22 +72,17 @@ public class Bullet extends Material{	//子弹
 	
 	@Override
 	public void anew(int fps) {
-		this.fps = fps;
 		//向上发射
 		if (direction == 1){
-			imgid = 1;
 			move(0, -1);
 		//向下发射
 		}else if (direction == 2){
-			imgid = 2;
 			move(0, 1);
 		//向右发射
 		}else if (direction == 3){
-			imgid = 3;
 			move(1, 0);
 		//向左发射
 		}else if (direction == 4){
-			imgid = 4;
 			move(-1, 0);
 		}
 	}
@@ -96,17 +90,17 @@ public class Bullet extends Material{	//子弹
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
 		// 保证知道头的方向正确
-		if (imgid == 1){
+		if (direction == 1){
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y, material_x + 6 + Data.MIN_X , material_y + 8 + Data.MIN_Y, 
 					34 * img_x +1 , 34 * img_y + 1, 34 * (img_x + 1) - 27, 34 * (img_y + 1) - 25, cc);//上
-		}else if (imgid == 2){
-			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-					34 * img_x + 11, 34 * img_y + 1, 34 * (img_x + 1) - 17, 34 * (img_y + 1) - 25, cc);//下
-		}else if (imgid == 3){
+		}else if (direction == 2){
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 6 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
+					34 * img_x + 11, 34 * img_y + 1, 34 * (img_x + 1) - 17, 34 * (img_y + 1) - 25, cc);//下
+		}else if (direction == 3){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 6 + Data.MIN_Y, 
 					34 * img_x + 11, 34 * img_y + 10, 34 * (img_x + 1) - 15, 34 * (img_y + 1) - 16, cc);//左
-		}else if (imgid == 4){
-			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
+		}else if (direction == 4){
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 8 + Data.MIN_X, material_y + 6 + Data.MIN_Y, 
 					34 * img_x + 1, 34 * img_y + 10, 34 * (img_x + 1) - 26, 34 * (img_y + 1) - 16, cc);//右
 		}
 	}
@@ -119,13 +113,13 @@ public class Bullet extends Material{	//子弹
 	}
 
 	public void bulletOut(){//子弹出界
-		if (imgid == 1){
+		if (direction == 1){
 			Data.matarry.add(new Effect(20, 4, material_x - 12, material_y - 16, 12, 22));
-		}else if (imgid == 2){
+		}else if (direction == 2){
 			Data.matarry.add(new Effect(20, 4, material_x - 12, material_y - 8, 12, 22));
-		}else if (imgid == 3){
+		}else if (direction == 3){
 			Data.matarry.add(new Effect(20, 4, material_x - 8, material_y - 12, 12, 22));
-		}else if (imgid == 4){
+		}else if (direction == 4){
 			Data.matarry.add(new Effect(20, 4, material_x - 16, material_y - 12, 12, 22));
 		}
 		if (principal <= 2){
@@ -136,102 +130,32 @@ public class Bullet extends Material{	//子弹
 	}
 	
 	private void moveJudge() {		//碰撞检测
-		int temp1 = 0;
-		int temp_x = 8;
-		int temp_y = 8;
 		for (Material mat : Data.matarry) {
 			// 子弹碰到敌方坦克并子弹属于我方 || 子弹碰到我方坦克并子弹属于敌方 || 碰到道具
 			if (((mat instanceof Tank_man && principal > 2) || (mat instanceof Tank_npc && principal <= 2)) || ((!(mat instanceof Tank_npc) && !(mat instanceof Tank_man)) && (mat != this))){
 				//子弹是否可穿过
 				if (!mat.ispenetrate){
-//					System.out.println(mat.getClass());
-					if (imgid == 1){
-//						if (mat.getMaterial_y() + mat.size_y > material_y && mat.getMaterial_y() + mat.size_y <= material_y + size_y){
-//							if (!(mat.getMaterial_x() +  1 > material_x + size_x + temp_x || mat.getMaterial_x() + mat.size_x < material_x + 1 - temp_x)){
-////								if (mat.getMaterial_y() <= material_y - size_y){
-//									if (material_x <=  mat.getMaterial_x() + mat.size_x / 4){
-//										temp1 = 1;
-//									}else if(material_x >  mat.getMaterial_x() + mat.size_x / 4 && material_x <=  mat.getMaterial_x() + mat.size_x / 4 * 3){
-//										temp1 = 2;
-//									}else{
-//										temp1 = 3;
-//									}
-//									mat.wounded(this,principal, imgid, temp1);
-////								}
-//							}
-//						}
-						// y轴判断 
-						if (mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) {
-							if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
-								if (material_x <=  mat.getMaterial_x() + mat.size_x / 4){
-									temp1 = 1;
-								}else if(material_x >  mat.getMaterial_x() + mat.size_x / 4 && material_x <=  mat.getMaterial_x() + mat.size_x / 4 * 3){
-									temp1 = 2;
-								}else{
-									temp1 = 3;
-								}
-								System.out.println("moveJudge() => ("+material_x+","+material_y+")");
-								System.out.println("moveJudge() => "+temp1);
-								mat.wounded(this,principal, imgid, temp1);
-//							}
-							}
-						}
-					}else if (imgid == 2){
-						if (mat.getMaterial_y() < material_y + size_y && mat.getMaterial_y() >= material_y - size_y){
-							if (!(mat.getMaterial_x() +  1 > material_x + size_x + temp_x || mat.getMaterial_x() + mat.size_x < material_x + 1 - temp_x)){
-//								if (mat.getMaterial_y() <= material_y + size_y){
-									if (material_x <=  mat.getMaterial_x() + mat.size_x / 4){
-										temp1 = 1;
-									}else if(material_x >  mat.getMaterial_x() + mat.size_x / 4 && material_x <=  mat.getMaterial_x() + mat.size_x / 4 * 3){
-										temp1 = 2;
-									}else{
-										temp1 = 3;
-									}
-//									System.out.println("moveJudge() => "+mat);
-									mat.wounded(this,principal, imgid, temp1);
-//								}
-							}
-						}
-					}else if (imgid == 3){
-						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x - size_x){
-							if (!(mat.getMaterial_y() +  1 > material_y + size_y + temp_y|| mat.getMaterial_y() + mat.size_y < material_y+ 1 - temp_y)){
-//								if (mat.getMaterial_x() <= material_x + size_x){
-									if (material_y <=  mat.getMaterial_y() + mat.size_y / 4){
-										temp1 = 1;
-									}else if(material_y >  mat.getMaterial_y() + mat.size_y / 4 && material_y <=  mat.getMaterial_y() + mat.size_y / 4 * 3){
-										temp1 = 2;
-									}else{
-										temp1 = 3;
-									}
-//									System.out.println("moveJudge() => "+mat);
-									mat.wounded(this,principal, imgid, temp1);
-//								}
-							}
-						}
-					}else if (imgid == 4){
-						if (mat.getMaterial_x() + mat.size_x > material_x && mat.getMaterial_x() + mat.size_x <= material_x + size_x){
-							if (!(mat.getMaterial_y() +  1 > material_y + size_y + temp_y || mat.getMaterial_y() + mat.size_y < material_y+ 1 - temp_y)){
-//								if (mat.getMaterial_x() <= material_x - size_x){
-									if (material_y <=  mat.getMaterial_y() + mat.size_y / 4){
-										temp1 = 1;
-									}else if(material_y >  mat.getMaterial_y() + mat.size_y / 4 && material_y <=  mat.getMaterial_y() + mat.size_y / 4 * 3){
-										temp1 = 2;
-									}else{
-										temp1 = 3;
-									}
-//									System.out.println("moveJudge() => "+mat);
-									mat.wounded(this,principal, imgid, temp1);
-//								}
+					if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {
+						if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
+							if (direction == 1) {
+								mat.wounded(this,principal, direction, material_x-12, material_y-12);
+							} else if(direction == 2) {
+								mat.wounded(this,principal, direction, material_x-12, material_y-16);
+							} else if (direction == 3) {
+								mat.wounded(this,principal, direction, material_x-15, material_y-12);
+							} else if (direction == 4) {
+								mat.wounded(this,principal, direction, material_x-15, material_y-10);
 							}
 						}
 					}
+//					System.out.println(mat.getClass());
 				}
 			}
 		}
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire, int num) {
+	public void wounded(Bullet bullet, int principal, int dire, int effect_x, int effect_y) {
 		Data.matarry.remove(bullet);
 		Data.matarry.remove(this);
 		new AudioPlay().play("bgmusic\\hit.wav");//fire

@@ -41,17 +41,13 @@ public class Sea extends Material{
 	@Override
 	public void anew(int fps) {
 		this.fps = fps;
-		
-//		if (this.fps >= 100000){
-//			this.fps = 0;
-//		}
+		//水域动态效果
 		if (imgid == 0 && this.fps % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish / 2){
 			imgid = 1;
 		}
 		if (imgid == 1 && this.fps % (Data.WINDOW_FPS / refurbish) <=  Data.WINDOW_FPS / refurbish && this.fps % (Data.WINDOW_FPS / refurbish) > Data.WINDOW_FPS / refurbish / 2){
 			imgid = 0;
 		}
-		
 	}
 
 	@Override
@@ -66,9 +62,8 @@ public class Sea extends Material{
 		
 	}
 
-	
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire, int num) {
+	public void wounded(Bullet bullet, int principal, int dire, int effect_x, int effect_y) {
 		// TODO 自动生成的方法存根
 		
 	}

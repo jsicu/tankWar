@@ -117,8 +117,6 @@ public class Tank_man extends Material{
 			}
 		}
 		
-		
-		
 		//特效ID
 		this.fps++;
 		this.fps_1++;
@@ -127,7 +125,9 @@ public class Tank_man extends Material{
 		}
 		//特效 
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
+			// 移动效果
 			if (enemy <= 2){
+				// 静止没效果
 				if (directions_x == 0 ^ directions_y == 0){
 					if (imgid == 0 && fps % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish / 2){
 						imgid = 1;
@@ -163,13 +163,13 @@ public class Tank_man extends Material{
 			if (fps_1 > Data.WINDOW_FPS * 0.6){	
 				//上模型
 				if (temp_y == -1){
-//					if (imgid == 1){
+					if (imgid == 1){
 						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 								34 * tempimg_x + 1, 34 * img_y + 1, 34 * (tempimg_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
-//					}else {
-//						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-//								34 * (tempimg_x + 1) + 1, 34 * img_y + 1, 34 * (tempimg_x + 2) - 1, 34 * (img_y + 1) - 1, cc);
-//					}
+					}else {
+						g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+								34 * (tempimg_x + 1) + 1, 34 * img_y + 1, 34 * (tempimg_x + 2) - 1, 34 * (img_y + 1) - 1, cc);
+					}
 				//右模型
 				} else if (temp_x == 1){
 					if (imgid == 1){
@@ -424,18 +424,10 @@ public class Tank_man extends Material{
 		}
 	}
 
-	public void wounded(Bullet bullet, int principal, int dire , int num){
+	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
-			if (dire == 1){
-				Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y + 16, 12, 22));
-			}else if (dire == 2){
-				Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y - 16, 12, 22));
-			}else if (dire == 3){
-				Data.matarry.add(new Effect(20, 4, material_x - 16, material_y  + (num - 2) * 16, 12, 22));
-			}else if (dire == 4){
-				Data.matarry.add(new Effect(20, 4, material_x + 16, material_y  + (num - 2) * 16, 12, 22));
-			}
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 			//不无敌
 			if (!defend){
 				if (rank - 1 >= 0){

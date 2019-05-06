@@ -25,7 +25,6 @@ public class CreateWindow extends JFrame{
 	private int fps;
 	private Image logo;
 	private CreateCanvas cc;
-	
 	int n = 0;
 	/**
 	 * 创建窗口
@@ -57,15 +56,13 @@ public class CreateWindow extends JFrame{
 		setResizable(false);
 		setIconImage(logo);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setVisible(true);		
+		setVisible(true);	
 		new GameStart();
-		
 		//绘制动画，以1000/fps毫秒触发动作时间
 		new Timer(1000 / fps ,new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				n++;
 				if (n >= fps * 100){
 					n = 0;

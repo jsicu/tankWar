@@ -20,16 +20,9 @@ public class Effect extends Material{//子弹特效
 		this.num1 = num / 10;
 		//如果基地被毁，设置die
 		if (num1 == 4 ) {
-			System.out.println("Effect() => "+num1);
 			((Tank_man)(Data.mat)).setDie(true);
 		}
-		
 	}
-
-//	public Effect(int img_x, int img_y, int material_x, int material_y, int refurbish) {
-//		super(img_x, img_y, material_x, material_y, refurbish);
-//		// TODO 自动生成的构造函数存根
-//	}
 
 	@Override
 	public void setMaterial_x(int material_x) {
@@ -62,7 +55,6 @@ public class Effect extends Material{//子弹特效
 		if(fps >= Data.WINDOW_FPS * 100 - 10){
 			Data.matarry.remove(this);
 		}
-		
 	}
 	
 	@Override
@@ -94,21 +86,21 @@ public class Effect extends Material{//子弹特效
 			}
 		//我方被摧毁
 		}else if(num1 == 4){
-//			System.out.println("draw() => "+material_y);
 			gameover();
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 66 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * 4 + 1, 34 * img_y + 1, 34 * 6 - 1, 34 * (img_y + 1) - 1, cc);
-			
+		//胜利
+		}else if(num1 == 5){
+			gameover();
+			g.drawImage(Data.TANK_WIN, material_x, material_y, material_x + 123 + Data.MIN_X, material_y + 75 + Data.MIN_Y, 
+					0, 0, 123, 75, cc);
 		}else {
 			Data.matarry.remove(this);
 		}
-		
-		
-		
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire , int num) {
+	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y) {
 		// TODO 自动生成的方法存根
 		
 	}

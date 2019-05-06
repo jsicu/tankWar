@@ -40,19 +40,19 @@ public class Hard extends Material{
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int directions, int num) {
+	public void wounded(Bullet bullet, int principal, int directions, int effect_x, int effect_y) {
 		if (directions == 1){
-			Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y, 12, 22));
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 		}else if (directions == 2){
-			Data.matarry.add(new Effect(20, 4, material_x + (num - 2) * 16, material_y - 16, 12, 22));
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 		}else if (directions == 3){
-			Data.matarry.add(new Effect(20, 4, material_x - 16, material_y + (num - 2) * 16, 12, 22));
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 		}else if (directions == 4){
-			Data.matarry.add(new Effect(20, 4, material_x, material_y + (num - 2) * 16, 12, 22));
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 		}
 		Data.matarry.remove(bullet);
 		if (principal <= 2){
-			new AudioPlay().play("src\\com\\young\\tank\\hit.wav");
+			new AudioPlay().play("bgmusictank\\hit.wav");
 		}
 	}
 	

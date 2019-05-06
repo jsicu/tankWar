@@ -53,13 +53,13 @@ public class CreateMap {
 	}
 	
 	public void draw(Graphics g, CreateCanvas cc) {
-//		if (imgid == 1){
+		if (imgid == 1){
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * img_x + 1, 34 * img_y + 1, 34 * (img_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
-//		}else {
-//			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-//					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
-//		}
+		}else {
+			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
+		}
 	}
 	//设置地图，按键按下事件
 	public void downKey(int num){
@@ -128,9 +128,10 @@ public class CreateMap {
 			new GameStart();
 			Data.start = 3;
 		}
-		System.out.println(select);
+//		System.out.println(select);
 	}
 	
+	/**选择道具*/
 	public void selectMaterial(){
 		if (select == 0){
 			DelMaterial();

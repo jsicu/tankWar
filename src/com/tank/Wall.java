@@ -53,17 +53,20 @@ public class Wall extends Material{
 	public void draw(Graphics g, CreateCanvas cc) {
 		// TODO 自动生成的方法存根
 //		imgId();
+//		System.out.println("material_x => "+material_x+" material_y => "+material_y);
 		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
 				34 * 2 + 1 + temp_img_x * 8, 34 * 7 + 1 + temp_img_y * 8, 34 * 2 + 8 + temp_img_x * 8, 34 * 7 + 8 + temp_img_y * 8, cc);
+//		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 16 + Data.MIN_X, material_y + 16 + Data.MIN_Y, 
+//				613, 171, 629, 187, cc);
 		
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire, int num) {
+	public void wounded(Bullet bullet, int principal, int dire, int effect_x, int effect_y) {
 		Data.matarry.remove(bullet);
 		Data.matarry.remove(this);
 		if (principal <= 2){
-			new AudioPlay().play("src\\com\\young\\tank\\brickErase.wav");
+			new AudioPlay().play("bgmusic\\brickErase.wav");
 		}
 		
 	}

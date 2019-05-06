@@ -52,7 +52,7 @@ public class Grass extends Material{
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire , int num) {
+	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y) {
 		// TODO 自动生成的方法存根
 		
 	}

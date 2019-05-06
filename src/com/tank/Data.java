@@ -16,6 +16,7 @@ public class Data {
 	public static final int WINDOW_FPS = 100;    						 //坦克移动速度
 	public static final String WINDOW_TITLE = "《坦克大战》 作者：林中奇";   //窗口标题
 	public static final Image WINDOW_ICOIMG = Toolkit.getDefaultToolkit().getImage("img/logo.png");		//显示logo
+	public static final Image TANK_WIN = Toolkit.getDefaultToolkit().getImage("img/victory.png");		//获胜
 	public static final Image TANK_PLAN = Toolkit.getDefaultToolkit().getImage("img/tankIcon.png");		//模型图集
 	public static final Image Start_Img = Toolkit.getDefaultToolkit().getImage("img/tankCover.png");	//开始页面背景图
 	
@@ -32,5 +33,7 @@ public class Data {
 	public static final int MAX_X = MIN_X + 416;				//战斗属性显示位
 	public static final int MAX_Y = MIN_Y + 416;
 	
+	public static int shiftNum = 2;							//切换输入法用,
 	public static int start = 3;
+	public static boolean style;							//单双人模式标志
 }
