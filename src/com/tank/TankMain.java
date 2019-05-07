@@ -10,8 +10,10 @@ import java.net.MalformedURLException;
  */
 public class TankMain{
 	static CreateWindow window;
-	
+//	public static Material mat;
+//	public static Material mat1;
 	public static void main(String[] args) throws MalformedURLException {
+		
 		window = new CreateWindow(Data.WINDOW_TITLE, Data.WINDOW_WIDTH, Data.WINDOW_HEIGHT, Data.WINDOW_FPS, Data.WINDOW_ICOIMG);
 	}
 }

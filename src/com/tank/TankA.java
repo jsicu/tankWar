@@ -1,10 +1,9 @@
 package com.tank;
 
 import java.awt.Graphics;
-import java.util.Random;
 
 //继承抽象类，就要实现里面的抽象方法
-public class Tank_man extends Material{
+public class TankA extends Material{
 	private static final long serialVersionUID = 8135824104107706697L;
 	
 	private int directions_x = 0;
@@ -37,15 +36,16 @@ public class Tank_man extends Material{
 	 * @param material_y 模型在地图出生的y轴位置
 	 * @param refurbish 特效刷新速度
 	 * @param speed 我方移动速度
+	 * @param enemy 敌我区别标识
 	 */
-	public Tank_man(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
+	public TankA(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.attack_id = 1;
 		super.ispenetrate = false;
 		
 		this.defend = true;
 		this.speed = speed;
-//		System.out.println("Tank_man() => "+enemy);
+//		System.out.println("TankA() => "+enemy);
 		this.enemy = enemy;
 	}
 	
@@ -365,24 +365,24 @@ public class Tank_man extends Material{
 //		}
 	}
 	//不移动坐标校正
-	private void reviseXY(int num){		
-		if (num == 1){
-			if (material_x % 16 < 8){
-				material_x = material_x / 16 * 16;
-			}else if (material_x % 16 >= 9){
-//				System.out.println("reviseXY() x => "+material_x % 16);
-				material_x = material_x / 16 * 16 + 16;
-			}
-		}else if (num == 2){
-			
-			if (material_y % 16 < 8){
-				material_y = material_y / 16 * 16;
-			}else if (material_y % 16 >= 9){
-				System.out.println("reviseXY() y => "+material_y / 16);
-				material_y = material_y / 16 * 16 + 16;
-			}
-		}
-	}
+//	private void reviseXY(int num){		
+//		if (num == 1){
+//			if (material_x % 16 < 8){
+//				material_x = material_x / 16 * 16;
+//			}else if (material_x % 16 >= 9){
+////				System.out.println("reviseXY() x => "+material_x % 16);
+//				material_x = material_x / 16 * 16 + 16;
+//			}
+//		}else if (num == 2){
+//			
+//			if (material_y % 16 < 8){
+//				material_y = material_y / 16 * 16;
+//			}else if (material_y % 16 >= 9){
+//				System.out.println("reviseXY() y => "+material_y / 16);
+//				material_y = material_y / 16 * 16 + 16;
+//			}
+//		}
+//	}
 	
 	public void attack(){
 		if (fps_1 > Data.WINDOW_FPS * 0.6){
@@ -436,7 +436,7 @@ public class Tank_man extends Material{
 					Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 					Data.matarry.remove(this);
 					die = true;
-					if (TankOther.myTank <= 0){
+					if (TankOther.myTankA <= 0){
 						new AudioPlay().play("bgmusic\\gameOver.wav");
 						Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 					}

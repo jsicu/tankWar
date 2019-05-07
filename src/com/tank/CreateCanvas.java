@@ -18,12 +18,15 @@ public class CreateCanvas extends JPanel{
 		for (Material mat : Data.matarry) {
 			mat.draw(g, this);
 		}
-		if (Data.start == 1){
+		// 单双人
+		if (Data.start == 1 || Data.start == 0){
 			TankOther.draw(g, this);
 		}
+		// 自定义地图
 		if (Data.start == 2){
 			Data.create_map.draw(g, this);
 		}
+		// 封面
 		if (Data.start == 3){
 			GameStart.draw(g, this);
 		}

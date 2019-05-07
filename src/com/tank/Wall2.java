@@ -168,5 +168,4 @@ public class Wall2 extends Material{
 		}
 		return false;
 	}
-
 }

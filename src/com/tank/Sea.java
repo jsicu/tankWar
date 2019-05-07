@@ -67,5 +67,4 @@ public class Sea extends Material{
 		// TODO 自动生成的方法存根
 		
 	}
-
 }

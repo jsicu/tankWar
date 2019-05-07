@@ -30,6 +30,15 @@ public class CreateMap {
 		super();
 		Data.matarry.clear();
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
+//		for (int i = 0; i < 8; i++) {
+//			for (int j = 0; j < 6; j++) {
+//				//掏出基地位置
+//				if (i >= 2 && j >= 2 && i < 6){
+//					continue;
+//				}
+//				Data.matarry.add(new Wall(0, 0, 176 + i * 8 , 368 + j * 8, 3));
+//			}
+//		}
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 6; j++) {
 				//掏出基地位置

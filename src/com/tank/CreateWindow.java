@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+
 /**
  * @author linzhongqi
  * @data 2019年3月15日
@@ -26,6 +27,8 @@ public class CreateWindow extends JFrame{
 	private Image logo;
 	private CreateCanvas cc;
 	int n = 0;
+//	private static Material material;
+//	private static Material material1;
 	/**
 	 * 创建窗口
 	 * 
@@ -58,6 +61,7 @@ public class CreateWindow extends JFrame{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);	
 		new GameStart();
+		
 		//绘制动画，以1000/fps毫秒触发动作时间
 		new Timer(1000 / fps ,new ActionListener(){
 
@@ -67,7 +71,8 @@ public class CreateWindow extends JFrame{
 				if (n >= fps * 100){
 					n = 0;
 				}
-				if (Data.start == 1){
+				// 单双人
+				if (Data.start == 1 || Data.start == 0){
 					TankOther.newtank();
 				}
 				
@@ -97,17 +102,41 @@ public class CreateWindow extends JFrame{
 			@Override
 			//释放某个键时调用此方法。
 			public void keyReleased(KeyEvent e) {
-				// TODO 自动生成的方法存根
+				 // 单人
 				if (Data.start == 1){
 					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
 					if (e.getKeyCode() == KeyEvent.VK_UP){
-						((Tank_man)(Data.mat)).upKey(0);
+						((TankA)(Data.mat)).upKey(0);
 					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-						((Tank_man)(Data.mat)).upKey(1);
+						((TankA)(Data.mat)).upKey(1);
 					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-						((Tank_man)(Data.mat)).upKey(2);
+						((TankA)(Data.mat)).upKey(2);
 					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-						((Tank_man)(Data.mat)).upKey(3);
+						((TankA)(Data.mat)).upKey(3);
+					}
+				}
+				// 双人
+				if (Data.start == 0){
+//					material=new TankA(0, 8, 128, 384, 3, 1, 1);
+					// 甲坦克
+					if (e.getKeyCode() == KeyEvent.VK_W){
+						((TankA)(TankOther.matA)).upKey(0);
+					}else if (e.getKeyCode() == KeyEvent.VK_S){
+						((TankA)(TankOther.matA)).upKey(1);
+					}else if (e.getKeyCode() == KeyEvent.VK_A){
+						((TankA)(TankOther.matA)).upKey(2);
+					}else if (e.getKeyCode() == KeyEvent.VK_D){
+						((TankA)(TankOther.matA)).upKey(3);
+					}
+					// 乙坦克
+					if (e.getKeyCode() == KeyEvent.VK_UP){
+						((TankB)(TankOther.matB)).upKey(0);
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+						((TankB)(TankOther.matB)).upKey(1);
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+						((TankB)(TankOther.matB)).upKey(2);
+					}else  if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+						((TankB)(TankOther.matB)).upKey(3);
 					}
 				}
 			}
@@ -120,27 +149,73 @@ public class CreateWindow extends JFrame{
 //			开火键 --> F键-VK_F
 			//按下某个键时调用此方法。
 			public void keyPressed(KeyEvent e) {
-				//单机模式
-				if (Data.start == 1){ 
-					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
-					if (e.getKeyCode() == KeyEvent.VK_UP){ 
-						((Tank_man)(Data.mat)).downKey(0);
-					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-						((Tank_man)(Data.mat)).downKey(1);
-					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-						((Tank_man)(Data.mat)).downKey(2);
-					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-						((Tank_man)(Data.mat)).downKey(3);
+				// 双人模式
+				if (Data.start == 0){ 
+					
+//					Material material =new TankA(0, 8, 128, 384, 3, 1, 1);
+					// 甲坦克
+					if (e.getKeyCode() == KeyEvent.VK_W){
+						((TankA)(TankOther.matA)).downKey(0);
+					}else if (e.getKeyCode() == KeyEvent.VK_S){
+						((TankA)(TankOther.matA)).downKey(1);
+					}else if (e.getKeyCode() == KeyEvent.VK_A){
+						((TankA)(TankOther.matA)).downKey(2);
+					}else if (e.getKeyCode() == KeyEvent.VK_D){
+						((TankA)(TankOther.matA)).downKey(3);
 					}
 					//按下F键发射炮弹
 					if (e.getKeyCode() == KeyEvent.VK_F){
-						((Tank_man)(Data.mat)).attack();
+						((TankA)(TankOther.matA)).attack();
+					
+					}
+					
+					// 乙坦克
+					if (e.getKeyCode() == KeyEvent.VK_UP){ 
+						((TankB)(TankOther.matB)).downKey(0);
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+						((TankB)(TankOther.matB)).downKey(1);
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+						((TankB)(TankOther.matB)).downKey(2);
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+						((TankB)(TankOther.matB)).downKey(3);
+					}
+					//按下j键发射炮弹
+					if (e.getKeyCode() == KeyEvent.VK_J){
+						((TankB)(TankOther.matB)).attack();
+					}
+					
+					//退出按键
+					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+						Data.matarry.clear();
+						//返回封面，重置数量
+						TankOther.myTankA = 4;			
+						TankOther.myTankB = 4;			
+						TankOther.enemySum = 20;
+						//关闭音乐
+						new AudioPlay().stop();			
+						Data.start = 3;
+					}
+				}// 单人模式
+				else if (Data.start == 1){ 
+					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
+					if (e.getKeyCode() == KeyEvent.VK_UP){ 
+						((TankA)(Data.mat)).downKey(0);
+					}else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+						((TankA)(Data.mat)).downKey(1);
+					}else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+						((TankA)(Data.mat)).downKey(2);
+					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+						((TankA)(Data.mat)).downKey(3);
+					}
+					//按下F键发射炮弹
+					if (e.getKeyCode() == KeyEvent.VK_F){
+						((TankA)(Data.mat)).attack();
 					}
 					//退出按键
 					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 						Data.matarry.clear();
 						//返回封面，重置数量
-						TankOther.myTank = 4;			
+						TankOther.myTankA = 4;			
 						TankOther.enemySum = 20;
 						//关闭音乐
 						new AudioPlay().stop();			
@@ -176,6 +251,8 @@ public class CreateWindow extends JFrame{
 //					进入 回车键-VK_ENTER
 //					选择 A键-VK_A
 					if (e.getKeyCode() == KeyEvent.VK_ENTER){
+						//关闭音乐
+						new AudioPlay().stop();	
 						GameStart.downKey(6);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_A){
@@ -190,7 +267,6 @@ public class CreateWindow extends JFrame{
 	}
 	
 	public int getWindowHeight(){
-		System.out.println("getHeight");
 		return getHeight();
 	}
 	

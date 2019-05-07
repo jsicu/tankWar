@@ -20,7 +20,7 @@ public class Effect extends Material{//子弹特效
 		this.num1 = num / 10;
 		//如果基地被毁，设置die
 		if (num1 == 4 ) {
-			((Tank_man)(Data.mat)).setDie(true);
+			((TankA)(Data.mat)).setDie(true);
 		}
 	}
 

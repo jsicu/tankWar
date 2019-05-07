@@ -63,6 +63,11 @@ public abstract class Material implements Serializable{
 	public void setRefurbish(int refurbish) {
 		this.refurbish = refurbish;
 	}
+	
+//	/**释放按键*/
+//	public abstract void upKey(int num);
+//	/**按下按键*/
+//	public abstract void downKey(int num);
 	/**x轴出界判断抽象方法*/
 	public abstract void setMaterial_x(int material_x);
 	/**y轴出界判断抽象方法*/

@@ -33,14 +33,14 @@ public class GameStart {
 				Data.start = 2;
 			}else if (start_id == 0){
 				Data.matarry.clear();
-				Data.style = true;		//双人模式
+				Data.style = false;		//单人模式
 				new TankOther();		//战场地图绘制
 				Data.start = 1;
 			}else if (start_id == 1){
 				Data.matarry.clear();
-				Data.style = false;		//单人模式
+				Data.style = true;		//双人模式
 				new TankOther();		//战场地图绘制
-				Data.start = 1;
+				Data.start = 0;
 			}
 		}
 		

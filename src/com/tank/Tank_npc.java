@@ -14,7 +14,7 @@ public class Tank_npc extends Material{
 	private int fps_1;
 	
 	private int speed = 2;
-	private int attackspeed;
+	private int attackspeed;	//子弹飞行速度
 	private int tempimg_x;
 	private int rank = 0; //等级
 	private int enemy;
@@ -367,7 +367,7 @@ public class Tank_npc extends Material{
 		int bullet_coumt = 0;
 		int bullet_sum = 0;
 		if (rank == 0){
-			attackspeed = 4;
+			attackspeed = 3;
 			bullet_sum = 1;
 		}else if (rank == 1){
 			attackspeed = 6;
@@ -398,14 +398,11 @@ public class Tank_npc extends Material{
 	}
 
 	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
-		if(TankOther.enemySum <= 0 ) {
-			TankOther.enemySum--;
-		}
-//		System.out.println("wounded() => "+TankOther.enemySum);
+//		System.out.println("wounded() => "+TankOther.onlineEnemyNum+";"+TankOther.enemySum);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
-			if (TankOther.enemySum == -4) {
+			if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 1) {
 				Data.matarry.add(new Effect(0, 0, Data.MIN_X + 112, Data.MAX_Y, 12, 50));
 			}
 			if (rank - 1 >= 0){

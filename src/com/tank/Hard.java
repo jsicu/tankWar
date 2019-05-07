@@ -54,6 +54,5 @@ public class Hard extends Material{
 		if (principal <= 2){
 			new AudioPlay().play("bgmusictank\\hit.wav");
 		}
-	}
-	
+	}	
 }

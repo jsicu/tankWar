@@ -56,5 +56,4 @@ public class Grass extends Material{
 		// TODO 自动生成的方法存根
 		
 	}
-
 }
