@@ -9,10 +9,6 @@ import java.awt.Graphics;
  */
 public class Wall extends Material{
 	private static final long serialVersionUID = 7273384988167714846L;
-//墙
-	
-	private int temp_img_x;
-	private int temp_img_y;
 	
 	public Wall(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
@@ -44,20 +40,12 @@ public class Wall extends Material{
 	}
 	
 	@Override
-	public void anew(int fps) {
-		temp_img_x = material_x % 32 / 8;
-		temp_img_y = material_y % 32 / 8;
-	}
+	public void anew(int fps) {}
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
-		// TODO 自动生成的方法存根
-//		imgId();
-//		System.out.println("material_x => "+material_x+" material_y => "+material_y);
-		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 8 + Data.MIN_X, material_y + 8 + Data.MIN_Y, 
-				34 * 2 + 1 + temp_img_x * 8, 34 * 7 + 1 + temp_img_y * 8, 34 * 2 + 8 + temp_img_x * 8, 34 * 7 + 8 + temp_img_y * 8, cc);
-//		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 16 + Data.MIN_X, material_y + 16 + Data.MIN_Y, 
-//				613, 171, 629, 187, cc);
+		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 16 + Data.MIN_X, material_y + 16 + Data.MIN_Y, 
+				613, 171, 629, 187, cc);
 		
 	}
 

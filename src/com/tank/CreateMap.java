@@ -30,22 +30,13 @@ public class CreateMap {
 		super();
 		Data.matarry.clear();
 		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
-//		for (int i = 0; i < 8; i++) {
-//			for (int j = 0; j < 6; j++) {
-//				//掏出基地位置
-//				if (i >= 2 && j >= 2 && i < 6){
-//					continue;
-//				}
-//				Data.matarry.add(new Wall(0, 0, 176 + i * 8 , 368 + j * 8, 3));
-//			}
-//		}
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 6; j++) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 3; j++) {
 				//掏出基地位置
-				if (i >= 2 && j >= 2 && i < 6){
+				if (i >= 1 && j >= 1 && i < 3){
 					continue;
 				}
-				Data.matarry.add(new Wall(0, 0, 176 + i * 8 , 368 + j * 8, 3));
+				Data.matarry.add(new Wall(0, 0, 176 + i * 16 , 368 + j * 16, 3));
 			}
 		}
 		
@@ -189,38 +180,30 @@ public class CreateMap {
 			}
 		}else if (select == 8){
 			DelMaterial();
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					Data.matarry.add(new Wall(0, 0, material_x + i * 8 ,material_y + j * 8, 3));
+			for (int i = 0; i < 2; i++) {
+				for (int j = 0; j < 2; j++) {
+					Data.matarry.add(new Wall(0, 0, material_x + i * 16 ,material_y + j * 16, 3));
 				}
 			}
 		}else if (select == 9){
 			DelMaterial();
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 2; j++) {
-					Data.matarry.add(new Wall(0, 0, material_x + i * 8 ,material_y + j * 8, 3));
-				}
+			for (int i = 0; i < 2; i++) {
+				Data.matarry.add(new Wall(0, 0, material_x + i * 16 ,material_y, 3));
 			}
 		}else if (select == 10){
 			DelMaterial();
 			for (int i = 0; i < 2; i++) {
-				for (int j = 0; j < 4; j++) {
-					Data.matarry.add(new Wall(0, 0, material_x + i * 8 ,material_y + j * 8, 3));
-				}
+				Data.matarry.add(new Wall(0, 0, material_x ,material_y + i * 16, 3));
 			}
 		}else if (select == 11){
 			DelMaterial();
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 2; j++) {
-					Data.matarry.add(new Wall(0, 0, material_x + i * 8,material_y + j * 8 + 16, 3));
-				}
+			for (int i = 0; i < 2; i++) {
+				Data.matarry.add(new Wall(0, 0, material_x + i * 16, material_y + 16, 3));
 			}
 		}else if (select == 12){
 			DelMaterial();
 			for (int i = 0; i < 2; i++) {
-				for (int j = 0; j < 4; j++) {
-					Data.matarry.add(new Wall(0, 0, material_x + i * 8 + 16,material_y + j * 8, 3));
-				}
+				Data.matarry.add(new Wall(0, 0, material_x + 16,material_y + i * 16, 3));
 			}
 		}
 		
