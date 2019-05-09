@@ -53,7 +53,6 @@ public class Boss extends Material{
 		} else if(!Data.style){
 			((TankA)(Data.mat)).setDie(true);
 		}
-		
 		img_x += 1; // Í¼±ê±ä»¯
 	}
 

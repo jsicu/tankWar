@@ -61,7 +61,7 @@ public class TankOther {
 					if (birth_randomA == 1){
 						myTankA--;
 						//坦克出现的位置
-						matA = new TankA(0, 8, 128, 384, 3, 1, 1);
+						matA = new TankA(0, 11, 128, 384, 3, 1, 1);
 						Data.matarry.add(0 ,matA);
 					}
 					//获取0-100随机数，让坦克死亡后不至于立即出现
@@ -73,7 +73,7 @@ public class TankOther {
 					if (birth_randomB == 1){
 						myTankB--;
 						//坦克出现的位置
-						matB = new TankB(8, 8, 256, 384, 3, 1, 1);
+						matB = new TankB(0, 12, 256, 384, 3, 1, 1);
 						Data.matarry.add(0 ,matB);
 					}
 					//获取0-100随机数，让坦克死亡后不至于里面出现
@@ -87,7 +87,7 @@ public class TankOther {
 					if (birth_randomA == 1){
 						myTankA--;
 						//坦克出现的位置
-						Data.mat = new TankA(0, 8, 128, 384, 3, 1, 1);
+						Data.mat = new TankA(0, 11, 128, 384, 3, 1, 1);
 						Data.matarry.add(0 ,Data.mat);
 					}
 					//获取0-100随机数，让坦克死亡后不至于立即出现

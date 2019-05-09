@@ -56,7 +56,6 @@ public class TankA extends Material{
 	
 	public void setDie(boolean die) {
 		this.die = die;
-		System.out.println("setDie() => "+this.die);
 	}
 	//位置显示，确保模型显示在地图中
 	@Override
@@ -86,7 +85,7 @@ public class TankA extends Material{
 	}
 	
 	public void setRank(int rank) {
-		if (rank >= 3){
+		if (rank > 3){
 			this.rank = 3;
 		}else{
 			this.rank = rank;
@@ -157,6 +156,7 @@ public class TankA extends Material{
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
+//		System.out.println("draw() => "+ rank +";"+img_x);
 		tempimg_x = rank * 8 + img_x;
 		//若游戏结束，我方坦克不在绘制
 		if (!die) {
@@ -251,13 +251,21 @@ public class TankA extends Material{
 //			if (mat != this){
 				if (temp_x == 1){
 					if (!mat.ispass){
-						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x + size_x - size_x / 4){
-							if (!(mat.getMaterial_y() +  1 > material_y + size_y || mat.getMaterial_y() + mat.size_y < material_y + 1)){
-								if (mat.getMaterial_x() <= material_x + size_x){
-									material_x = mat.getMaterial_x() - size_x;
-								}
+						System.out.println("moveJudge() => dasda"+mat.ispass);
+						if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {
+							if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
+//								material_x = mat.getMaterial_x() - size_x;
+								
 							}
 						}
+						
+//						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x + size_x - size_x / 4){
+//							if (!(mat.getMaterial_y() +  1 > material_y + size_y || mat.getMaterial_y() + mat.size_y < material_y + 1)){
+//								if (mat.getMaterial_x() <= material_x + size_x){
+//									material_x = mat.getMaterial_x() - size_x;
+//								}
+//							}
+//						}
 					}
 				}else if(temp_x == -1){
 					if (!mat.ispass){
@@ -311,7 +319,7 @@ public class TankA extends Material{
 	}
 	/**方向*/
 	private void directions() {
-//		if (directions_x == 0 && directions_y == 0){
+		if (directions_x == 0 && directions_y == 0){
 			if (take_up){
 				directions_x = 0;
 				directions_y = -3;
@@ -337,7 +345,7 @@ public class TankA extends Material{
 				temp_y = 0;
 //				reviseXY(2);
 			}
-//		}
+		}
 	}
 
 	public void upKey(int num){
@@ -359,10 +367,6 @@ public class TankA extends Material{
 			directions_y = 0;
 		}
 		
-//		if (directions_x == x && directions_y == y){
-//			directions_x = 0;
-//			directions_y = 0;
-//		}
 	}
 	//不移动坐标校正
 //	private void reviseXY(int num){		

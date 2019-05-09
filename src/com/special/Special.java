@@ -89,7 +89,6 @@ public class Special extends Material {
 				if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {
 					if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
 						remove(this, true);
-						System.out.println("moveJudge() => "+this.type);
 						switch (this.type) {
 						case 1:
 							// 无敌
@@ -104,7 +103,9 @@ public class Special extends Material {
 							for (Material enemy : Data.matarry) {
 								if (enemy instanceof TankEnemy) {
 									Data.matarry.remove(enemy);
-									Data.matarry.add(new Effect(21, 4, enemy.material_x, enemy.material_y, 5, 32));
+									for (int i = 0; i < 10; i++) {
+										Data.matarry.add(new Effect(21, 4, enemy.material_x, enemy.material_y, 5, 32));
+									}
 								}
 							}
 							break;
@@ -129,7 +130,22 @@ public class Special extends Material {
 								TankOther.myTankB ++;
 							}
 							break;
-
+						case 5:
+							// 坦克升级
+							if (mat instanceof TankA) {
+								int tankGrade = 0;
+								// 双人
+								if (Data.style) {
+									tankGrade = ((TankA)(TankOther.matA)).getRank() + 1;
+									((TankA)(TankOther.matA)).setRank(tankGrade);
+								}else if (!Data.style) {
+									tankGrade = ((TankA)(Data.mat)).getRank() + 1;
+									((TankA)(Data.mat)).setRank(tankGrade);
+								}
+							}else {
+								((TankB)(TankOther.matB)).setRank(((TankB)(TankOther.matB)).getRank() + 1);
+							}
+							break;
 						default:
 							break;
 						}
@@ -161,7 +177,6 @@ public class Special extends Material {
 			public void run() {
 				for (Material mat : Data.matarry) {
 					if (mat instanceof Hard && mat.refurbish == 1) {
-						System.out.println("run() => dasdas");
 						Data.matarry.remove(mat);
 					}
 				}

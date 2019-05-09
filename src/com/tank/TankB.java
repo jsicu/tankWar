@@ -155,6 +155,7 @@ public class TankB extends Material{
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
+//		System.out.println("draw() => "+ rank +";"+img_x);
 		tempimg_x = rank * 8 + img_x;
 		//若游戏结束，我方坦克不在绘制
 		if (!die) {

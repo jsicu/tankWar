@@ -20,8 +20,8 @@ public abstract class Material implements Serializable{
 	public int size_y = 32;
 	
 	public int attack_id;		//可被攻击子弹等级
-	public boolean ispenetrate;	//是否可被穿透（false：可穿透，true：不可穿透 ）
-	public boolean ispass;		//是否子弹可通过
+	public boolean ispenetrate;	//是否可被子弹穿透（false：可穿透，true：不可穿透 ）
+	public boolean ispass;		//是否可通过
 	
 	public Material(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super();
