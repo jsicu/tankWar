@@ -19,8 +19,11 @@ public class Effect extends Material{//子弹特效
 		super(img_x, img_y, material_x, material_y, refurbish);
 		this.num1 = num / 10;
 		//如果基地被毁，设置die
-		if (num1 == 4 ) {
+		if (num1 == 4 && !Data.style) {
 			((TankA)(Data.mat)).setDie(true);
+		}else if(num1 == 4 && Data.style){
+			((TankA)(TankOther.matA)).setDie(true);
+			((TankB)(TankOther.matB)).setDie(true);
 		}
 	}
 

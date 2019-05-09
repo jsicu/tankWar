@@ -47,7 +47,13 @@ public class Boss extends Material{
 		new AudioPlay().play("bgmusic\\gameOver.wav");
 		Data.matarry.add(new Effect(20, 4, material_x, material_y, 6, 14));
 		Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
-		((TankA)(Data.mat)).setDie(true);
+		if (Data.style) {
+			((TankA)(TankOther.matA)).setDie(true);
+			((TankB)(TankOther.matB)).setDie(true);
+		} else if(!Data.style){
+			((TankA)(Data.mat)).setDie(true);
+		}
+		
 		img_x += 1; // Í¼±ê±ä»¯
 	}
 

@@ -21,7 +21,8 @@ public abstract class Material implements Serializable{
 	
 	public int attack_id;		//可被攻击子弹等级
 	public boolean ispenetrate;	//是否可被穿透（false：可穿透，true：不可穿透 ）
-	public boolean ispass;		//是否可通过
+	public boolean ispass;		//是否子弹可通过
+	public boolean isspecial;	//特效道具
 	
 	public Material(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super();
@@ -64,10 +65,8 @@ public abstract class Material implements Serializable{
 		this.refurbish = refurbish;
 	}
 	
-//	/**释放按键*/
-//	public abstract void upKey(int num);
-//	/**按下按键*/
-//	public abstract void downKey(int num);
+//	/**特效移除抽象方法*/
+//	public abstract void remove(int material_x);
 	/**x轴出界判断抽象方法*/
 	public abstract void setMaterial_x(int material_x);
 	/**y轴出界判断抽象方法*/

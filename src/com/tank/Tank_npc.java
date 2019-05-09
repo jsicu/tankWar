@@ -3,6 +3,8 @@ package com.tank;
 import java.awt.Graphics;
 import java.util.Random;
 
+import com.special.*;
+
 public class Tank_npc extends Material{
 	private static final long serialVersionUID = -3558659606091370106L;
 	
@@ -399,9 +401,23 @@ public class Tank_npc extends Material{
 
 	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
 //		System.out.println("wounded() => "+TankOther.onlineEnemyNum+";"+TankOther.enemySum);
+		// 10%±©×°ÂÊ
+		int specialRand = new Random().nextInt(3);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
+			if (specialRand == 1) {
+				int rand = new Random().nextInt(1) + 1;
+				System.out.println("wounded() => "+rand);
+				switch (rand) {
+				case 1:
+					 // È«ËÀ
+					Data.matarry.add(new AllDie(20, 6, effect_x, effect_y, 4));
+					break;
+				default:
+					break;
+				}
+			}
 			if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 1) {
 				Data.matarry.add(new Effect(0, 0, Data.MIN_X + 112, Data.MAX_Y, 12, 50));
 			}

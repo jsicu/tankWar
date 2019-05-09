@@ -2,6 +2,8 @@ package com.tank;
 
 import java.awt.Graphics;
 
+import com.special.AllDie;
+
 //继承抽象类，就要实现里面的抽象方法
 public class TankA extends Material{
 	private static final long serialVersionUID = 8135824104107706697L;
@@ -27,6 +29,7 @@ public class TankA extends Material{
 	private boolean take_left;
 	private boolean take_right;
 	private boolean defend;			//无敌标志位
+	public static Material remove;
 	/**
 	 * 坦克模型及属性
 	 * 
@@ -116,7 +119,6 @@ public class TankA extends Material{
 				imgid_2 = 4;
 			}
 		}
-		
 		//特效ID
 		this.fps++;
 		this.fps_1++;
@@ -247,8 +249,18 @@ public class TankA extends Material{
 	/**碰撞检测*/	
 	private void moveJudge() {		
 		for (Material mat : Data.matarry) {
-//			System.out.println("moveJudge() => "+mat);
-			if (mat != this){
+//			System.out.println("moveJudge() => "+this);
+			//道具碰撞
+			if (mat.isspecial && mat.ispenetrate) {
+				if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {
+					if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
+						remove = new AllDie(0, 0, 0, 0, 0);
+						((AllDie)(remove)).forOut(true);
+//						AllDie().forOut(true);
+					}
+				}
+			}
+//			if (mat != this){
 				if (temp_x == 1){
 					if (!mat.ispass){
 						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x + size_x - size_x / 4){
@@ -290,7 +302,7 @@ public class TankA extends Material{
 						}
 					}
 				}
-			}
+//			}
 		}
 	}
 	//方向方法	
