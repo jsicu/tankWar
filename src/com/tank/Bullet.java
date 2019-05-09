@@ -132,7 +132,7 @@ public class Bullet extends Material{	//子弹
 	private void moveJudge() {		//碰撞检测
 		for (Material mat : Data.matarry) {
 			// 子弹碰到敌方坦克并子弹属于我方 || 子弹碰到我方坦克并子弹属于敌方 || 碰到道具
-			if (((mat instanceof TankA && principal > 2) || (mat instanceof Tank_npc && principal <= 2)) || ((!(mat instanceof Tank_npc) && !(mat instanceof TankA)) && (mat != this))){
+			if (((mat instanceof TankA && principal > 2) || (mat instanceof TankEnemy && principal <= 2)) || ((!(mat instanceof TankEnemy) && !(mat instanceof TankA)) && (mat != this))){
 				//子弹是否可穿过
 				if (!mat.ispenetrate){
 					if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {

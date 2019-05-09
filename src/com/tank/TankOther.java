@@ -42,7 +42,7 @@ public class TankOther {
 		int onlineTankANum = 0;		//场上甲方坦克数
 		int onlineTankBNum = 0;		//场上乙方坦克数
 		for (Material mat : Data.matarry) {
-			if (mat instanceof Tank_npc){
+			if (mat instanceof TankEnemy){
 				onlineEnemyNum++;
 			}
 			if (mat instanceof TankA){
@@ -105,11 +105,11 @@ public class TankOther {
 					enemyBornRandom = new Random().nextInt(3);
 					//复活地方
 					if (enemyBornRandom == 0){
-						Data.matarry.add(0, new Tank_npc(0, 2, 192, 0, 3, 6, 5));					
+						Data.matarry.add(0, new TankEnemy(0, 2, 192, 0, 3, 6, 5));					
 					}else if (enemyBornRandom == 1){
-						Data.matarry.add(0, new Tank_npc(0, 2, 384,0, 3, 7, 5));
+						Data.matarry.add(0, new TankEnemy(0, 2, 384,0, 3, 7, 5));
 					}else if (enemyBornRandom == 2){
-						Data.matarry.add(0, new Tank_npc(0, 2, 0, 0, 3, 8, 5));
+						Data.matarry.add(0, new TankEnemy(0, 2, 0, 0, 3, 8, 5));
 					}
 				}
 				//获取0-100随机数，让坦克死亡后不至于里面出现

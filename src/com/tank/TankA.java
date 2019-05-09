@@ -26,7 +26,7 @@ public class TankA extends Material{
 	private boolean take_down;
 	private boolean take_left;
 	private boolean take_right;
-	private boolean defend;			//无敌标志位
+	public static boolean defend;			//无敌标志位
 	
 	/**
 	 * 坦克模型及属性
@@ -44,7 +44,7 @@ public class TankA extends Material{
 		super.attack_id = 1;
 		super.ispenetrate = false;
 		
-		this.defend = true;
+		TankA.defend = true;
 		this.speed = speed;
 //		System.out.println("TankA() => "+enemy);
 		this.enemy = enemy;

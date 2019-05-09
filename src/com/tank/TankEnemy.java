@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.special.*;
 
-public class Tank_npc extends Material{
+public class TankEnemy extends Material{
 	private static final long serialVersionUID = -3558659606091370106L;
 	
 	private int directions_x = 0;
@@ -30,7 +30,7 @@ public class Tank_npc extends Material{
 	int automove;
 	int autoattack;
 	
-	public Tank_npc(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
+	public TankEnemy(int img_x, int img_y, int material_x, int material_y, int refurbish,int enemy, int speed) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.attack_id = 1;
 		super.ispenetrate = false;
@@ -402,7 +402,7 @@ public class Tank_npc extends Material{
 	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
 //		System.out.println("wounded() => "+TankOther.onlineEnemyNum+";"+TankOther.enemySum);
 		// 10%暴装率
-		int specialRand = new Random().nextInt(5);
+		int specialRand = new Random().nextInt(3);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
@@ -412,19 +412,19 @@ public class Tank_npc extends Material{
 				switch (rand) {
 				case 1:
 					 // 坦克无敌
-					Data.matarry.add(new AllDie(18, 6, effect_x, effect_y, 4, 1));
+					Data.matarry.add(new Special(18, 6, effect_x, effect_y, 4, 4));
 					break;
 				case 2:
 					// 全死
-					Data.matarry.add(new AllDie(20, 6, effect_x, effect_y, 4, 1));
+					Data.matarry.add(new Special(20, 6, effect_x, effect_y, 4, 4));
 					break;
 				case 3:
 					// 修改基地
-					Data.matarry.add(new AllDie(22, 6, effect_x, effect_y, 4, 1));
+					Data.matarry.add(new Special(22, 6, effect_x, effect_y, 4, 4));
 					break;
 				case 4:
 					// 坦克生命
-					Data.matarry.add(new AllDie(24, 6, effect_x, effect_y, 4, 1));
+					Data.matarry.add(new Special(24, 6, effect_x, effect_y, 4, rand));
 					break;
 				default:
 					break;
