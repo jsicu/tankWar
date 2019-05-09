@@ -12,7 +12,7 @@ public class TankOther {
 	private static int enemy_random = 1;	//敌方坦克出生随机数
 	private static int birth_randomA = 1;	//我方坦克出生随机数
 	private static int birth_randomB = 1;	//我方坦克出生随机数
-	public static int enemySum = 6;		//敌人数
+	public static int enemySum = 20;		//敌人数
 	public static int myTankA = 4;			//甲方数
 	public static int myTankB = 4;			//乙方数
 	public static Material matA;

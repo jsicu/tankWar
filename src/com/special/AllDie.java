@@ -9,6 +9,7 @@ import com.tank.CreateCanvas;
 import com.tank.Data;
 import com.tank.Material;
 import com.tank.TankA;
+import com.tank.TankB;
 
 /**
 * @author 林中奇
@@ -19,11 +20,10 @@ public class AllDie extends Material {
 	private static final long serialVersionUID = -5830733238810374715L;
 	private int fpsId = 0;
 	
-	public AllDie(int img_x, int img_y, int material_x, int material_y, int refurbish) {
+	public AllDie(int img_x, int img_y, int material_x, int material_y, int refurbish, int type) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.ispenetrate = true;
 		super.ispass = true;
-		super.isspecial = true;
 	}
 	
 	@Override
@@ -60,6 +60,7 @@ public class AllDie extends Material {
 		}else {
 			imgid = 0;
 		}
+		moveJudge();
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class AllDie extends Material {
 		// (20,6)
 		if (imgid == 1) {
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-					34 * img_x, 34 * img_y, 34 * img_x + 32, 34 * img_y + 32, cc);
+				34 * img_x, 34 * img_y, 34 * img_x + 32, 34 * img_y + 32, cc);
 		} else {
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * (img_x + 1), 34 * img_y, 34 * (img_x + 1) + 32, 34 * img_y + 32, cc);	
@@ -78,16 +79,27 @@ public class AllDie extends Material {
 	@Override
 	public void wounded(Bullet bullet, int principal, int directions, int effect_x, int effect_y) {
 		// TODO 自动生成的方法存根
-		
 	}
 	
+	private void moveJudge() {	
+		for (Material mat : Data.matarry) {
+			// 子弹碰到敌方坦克并子弹属于我方 || 子弹碰到我方坦克并子弹属于敌方 || 碰到道具
+			if (mat instanceof TankA || mat instanceof TankB){
+				// 道具
+//				System.out.println("moveJudge() => "+mat);
+				if ((mat.getMaterial_y() + mat.size_y >= material_y && mat.getMaterial_y() < material_y) | (mat.getMaterial_y() + mat.size_y >= material_y + size_y && mat.getMaterial_y() < material_y + size_y)) {
+					if ((mat.getMaterial_x() <= material_x && material_x < mat.getMaterial_x() + mat.size_x) | (mat.getMaterial_x() <= material_x + size_x && material_x + size_x < mat.getMaterial_x() + mat.size_x)) {
+						remove(this, true);
+					}
+				}
+			}
+		}
+	}
 	/**移去特效*/
 	public void remove(AllDie allDie,boolean immediately) {
 		Timer timer = new Timer();
 		if (immediately) {
-			System.out.println("remove() => "+ Data.matarry);
-			System.out.println("remove() => "+ allDie);
-//			TankA.remove.remove(allDie);
+			Data.matarry.remove(allDie);
 		}else {
 			timer.schedule(new TimerTask() {
 				@Override
@@ -99,9 +111,4 @@ public class AllDie extends Material {
 		
 	}
 
-	public void forOut(boolean immediately) {
-//		System.out.println("remove() => sdasdasd"+ this);
-		remove(this, immediately);
-	}
-	
 }

@@ -402,17 +402,29 @@ public class Tank_npc extends Material{
 	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
 //		System.out.println("wounded() => "+TankOther.onlineEnemyNum+";"+TankOther.enemySum);
 		// 10%暴装率
-		int specialRand = new Random().nextInt(3);
+		int specialRand = new Random().nextInt(5);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 			if (specialRand == 1) {
-				int rand = new Random().nextInt(1) + 1;
+				int rand = new Random().nextInt(4) + 1;
 				System.out.println("wounded() => "+rand);
 				switch (rand) {
 				case 1:
-					 // 全死
-					Data.matarry.add(new AllDie(20, 6, effect_x, effect_y, 4));
+					 // 坦克无敌
+					Data.matarry.add(new AllDie(18, 6, effect_x, effect_y, 4, 1));
+					break;
+				case 2:
+					// 全死
+					Data.matarry.add(new AllDie(20, 6, effect_x, effect_y, 4, 1));
+					break;
+				case 3:
+					// 修改基地
+					Data.matarry.add(new AllDie(22, 6, effect_x, effect_y, 4, 1));
+					break;
+				case 4:
+					// 坦克生命
+					Data.matarry.add(new AllDie(24, 6, effect_x, effect_y, 4, 1));
 					break;
 				default:
 					break;
