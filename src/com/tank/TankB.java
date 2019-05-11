@@ -252,9 +252,9 @@ public class TankB extends Material{
 					if (!mat.ispass){
 						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x + size_x - size_x / 4){
 							if (!(mat.getMaterial_y() +  1 > material_y + size_y || mat.getMaterial_y() + mat.size_y < material_y + 1)){
-								if (mat.getMaterial_x() <= material_x + size_x){
+//								if (mat.getMaterial_x() <= material_x + size_x){
 									material_x = mat.getMaterial_x() - size_x;
-								}
+//								}
 							}
 						}
 					}
@@ -262,9 +262,9 @@ public class TankB extends Material{
 					if (!mat.ispass){
 						if (mat.getMaterial_x() + mat.size_x > material_x&& mat.getMaterial_x() + mat.size_x <= material_x + size_x / 4){
 							if (!(mat.getMaterial_y() +  1 > material_y + size_y || mat.getMaterial_y() + mat.size_y < material_y + 1)){
-								if (mat.getMaterial_x() <= material_x + size_x){
+//								if (mat.getMaterial_x() <= material_x + size_x){
 									material_x = mat.getMaterial_x() + mat.size_x;
-								}
+//								}
 							}
 						}
 					}
@@ -272,9 +272,9 @@ public class TankB extends Material{
 					if (!mat.ispass){
 						if (mat.getMaterial_y() < material_y + size_y && mat.getMaterial_y() >= material_y + size_y - size_y / 4){
 							if (!(mat.getMaterial_x() +  1 > material_x + size_x || mat.getMaterial_x() + mat.size_x < material_x + 1)){
-								if (mat.getMaterial_y() <= material_y + size_y){
+//								if (mat.getMaterial_y() <= material_y + size_y){
 									material_y = mat.getMaterial_y() - size_y;
-								}
+//								}
 							}
 						}
 					}
@@ -282,9 +282,9 @@ public class TankB extends Material{
 					if (!mat.ispass){
 						if (mat.getMaterial_y() + mat.size_y > material_y && mat.getMaterial_y() + mat.size_y <= material_y + size_y / 4){
 							if (!(mat.getMaterial_x() +  1 > material_x + size_x || mat.getMaterial_x() + mat.size_x < material_x + 1)){
-								if (mat.getMaterial_y() <= material_y + size_y){
+//								if (mat.getMaterial_y() <= material_y + size_y){
 									material_y = mat.getMaterial_y() + mat.size_y;
-								}
+//								}
 							}
 						}
 					}
@@ -310,7 +310,7 @@ public class TankB extends Material{
 	}
 	/**方向*/
 	private void directions() {
-//		if (directions_x == 0 && directions_y == 0){
+		if (directions_x == 0 && directions_y == 0){
 			if (take_up){
 				directions_x = 0;
 				directions_y = -3;
@@ -336,7 +336,7 @@ public class TankB extends Material{
 				temp_y = 0;
 //				reviseXY(2);
 			}
-//		}
+		}
 	}
 
 	public void upKey(int num){
@@ -358,10 +358,6 @@ public class TankB extends Material{
 			directions_y = 0;
 		}
 		
-//		if (directions_x == x && directions_y == y){
-//			directions_x = 0;
-//			directions_y = 0;
-//		}
 	}
 	//不移动坐标校正
 //	private void reviseXY(int num){		

@@ -408,7 +408,6 @@ public class TankEnemy extends Material{
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 			if (specialRand == 1) {
 				int rand = new Random().nextInt(4) + 1;
-				System.out.println("wounded() => "+rand);
 				switch (rand) {
 				case 1:
 					 // л╧©кнч╣п

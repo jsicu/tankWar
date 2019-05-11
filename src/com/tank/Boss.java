@@ -41,19 +41,22 @@ public class Boss extends Material{
 
 	@Override
 	public void wounded(Bullet bullet, int principal, int directions, int effect_x, int effect_y) {
-		Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
-		Data.matarry.remove(bullet);
-		new AudioPlay().play("bgmusic\\kill.wav");
-		new AudioPlay().play("bgmusic\\gameOver.wav");
-		Data.matarry.add(new Effect(20, 4, material_x, material_y, 6, 14));
-		Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
-		if (Data.style) {
-			((TankA)(TankOther.matA)).setDie(true);
-			((TankB)(TankOther.matB)).setDie(true);
-		} else if(!Data.style){
-			((TankA)(Data.mat)).setDie(true);
+		if (img_x == 19) {
+			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
+			Data.matarry.remove(bullet);
+			new AudioPlay().play("bgmusic\\kill.wav");
+			new AudioPlay().play("bgmusic\\gameOver.wav");
+			Data.matarry.add(new Effect(20, 4, material_x, material_y, 6, 14));
+			Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
+			if (Data.style) {
+				((TankA)(TankOther.matA)).setDie(true);
+				((TankB)(TankOther.matB)).setDie(true);
+			} else if(!Data.style){
+				((TankA)(Data.mat)).setDie(true);
+			}
+			img_x += 1; // 图标变化
 		}
-		img_x += 1; // 图标变化
+		
 	}
 
 }
