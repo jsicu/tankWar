@@ -26,6 +26,7 @@ public class TankEnemy extends Material{
 	boolean take_down = false;
 	boolean take_left = false;
 	boolean take_right = false;
+	public static boolean move = true;
 	
 	int automove;
 	int autoattack;
@@ -34,7 +35,7 @@ public class TankEnemy extends Material{
 		super(img_x, img_y, material_x, material_y, refurbish);
 		super.attack_id = 1;
 		super.ispenetrate = false;
-		
+		this.rank = new Random().nextInt(3);
 		this.fps_1 = 0;
 		this.speed = speed;
 		this.enemy = enemy;
@@ -81,8 +82,9 @@ public class TankEnemy extends Material{
 		if (fps_1 == 100000){
 			fps_1 = 0;
 		}
-		
-		if (fps_1 > Data.WINDOW_FPS * 0.6){
+		// 移动
+		if (move) {
+			if (fps_1 > Data.WINDOW_FPS * 0.6){
 			if (enemy <= 2){
 				if (directions_x == 0 ^ directions_y == 0){
 					if (imgid == 0 && fps % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish / 2){
@@ -93,7 +95,6 @@ public class TankEnemy extends Material{
 					}
 				}
 			}else {
-//			this.temp_y = 1;
 				if (imgid == 0 && fps % (Data.WINDOW_FPS / refurbish) <= Data.WINDOW_FPS / refurbish / 2){
 					imgid = 1;
 				}
@@ -128,6 +129,8 @@ public class TankEnemy extends Material{
 				imgid_1 = 1;
 			}
 		}
+		}
+		
 		
 	}
 	/**敌方坦克出生效果*/
@@ -296,7 +299,6 @@ public class TankEnemy extends Material{
 			take_right = true;
 		}
 		directions();
-//		System.out.println(directions_x + "..." + directions_x);
 	}
 	
 	private void directions() {
@@ -400,48 +402,56 @@ public class TankEnemy extends Material{
 	}
 
 	public void wounded(Bullet bullet, int principal, int dire , int effect_x, int effect_y){
-//		System.out.println("wounded() => "+TankOther.onlineEnemyNum+";"+TankOther.enemySum);
 		// 10%暴装率
-		int specialRand = new Random().nextInt(5);
+		int specialRand = new Random().nextInt(7);
 		if ((enemy <= 2 && principal > 2) || (enemy > 2 && principal <= 2)){
 			Data.matarry.remove(bullet);
 			Data.matarry.add(new Effect(20, 4, effect_x, effect_y, 12, 22));
 			if (specialRand == 1) {
-				int rand = new Random().nextInt(4) + 1;
+				int rand = new Random().nextInt(5) + 1;
+				int x = new Random().nextInt(350) + 50;
+				int y = new Random().nextInt(380);
 				switch (rand) {
 				case 1:
 					 // 坦克无敌
-					Data.matarry.add(new Special(18, 6, effect_x, effect_y, 4, rand));
+					Data.matarry.add(new Special(18, 6, x, y, 4, rand));
 					break;
 				case 2:
 					// 全死
-					Data.matarry.add(new Special(20, 6, effect_x, effect_y, 4, rand));
+					Data.matarry.add(new Special(20, 6, x, y, 4, rand));
 					break;
 				case 3:
 					// 修改基地
-					Data.matarry.add(new Special(22, 6, effect_x, effect_y, 4, rand));
+					Data.matarry.add(new Special(22, 6, x, y, 4, rand));
 					break;
 				case 4:
 					// 坦克生命
-					Data.matarry.add(new Special(24, 6, effect_x, effect_y, 4, rand));
+					Data.matarry.add(new Special(24, 6, x, y, 4, rand));
 					break;
 				case 5:
 					// 坦克升级
-					Data.matarry.add(new Special(16, 6, effect_x, effect_y, 4, rand));
+					Data.matarry.add(new Special(16, 6, x, y, 4, rand));
+					break;
+				case 6:
+					// 敌方暂停
+					Data.matarry.add(new Special(14, 6, x, y, 4, rand));
 					break;
 				default:
 					break;
 				}
-			}
-			if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 1) {
-				Data.matarry.add(new Effect(0, 0, Data.MIN_X + 112, Data.MAX_Y, 12, 50));
 			}
 			if (rank - 1 >= 0){
 				rank = rank - 1;
 			}else{
 				Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 				Data.matarry.remove(this);
+				TankOther.onlineEnemyNum--;
 				new AudioPlay().play("bgmusic\\kill.wav");//fire
+			}
+			System.out.println("wounded() => TankOther.onlineEnemyNum = "+TankOther.onlineEnemyNum);
+			if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 0) {
+				Data.checkNum++;
+				new Data().delay(4000);
 			}
 		}
 	}

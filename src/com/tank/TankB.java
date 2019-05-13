@@ -431,7 +431,7 @@ public class TankB extends Material{
 					Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 					Data.matarry.remove(this);
 					die = true;
-					if (TankOther.myTankB <= 0){
+					if (Data.myTankB <= 0){
 						new AudioPlay().play("bgmusic\\gameOver.wav");
 						Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 					}

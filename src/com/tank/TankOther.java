@@ -13,8 +13,6 @@ public class TankOther {
 	private static int birth_randomA = 1;	//我方坦克出生随机数
 	private static int birth_randomB = 1;	//我方坦克出生随机数
 	public static int enemySum = 20;		//敌人数
-	public static int myTankA = 4;			//甲方数
-	public static int myTankB = 4;			//乙方数
 	public static Material matA;
 	public static Material matB;
 	public static int onlineEnemyNum = 0;		//场上敌方坦克数
@@ -24,13 +22,14 @@ public class TankOther {
 	public TankOther() {
 		super();
 		try {	
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
-				Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
-				ois.close();
-			} catch (Exception e1) {
-				// TODO 自动生成的 catch 块
-				e1.printStackTrace();
-			}
+//			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("map\\"+Data.checkNum+".tmp"));
+			Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
+			ois.close();
+		} catch (Exception e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}
 //		System.out.println("TankOther()"+Data.matarry);
 //		Data.matarry.add(new Boss(19, 5, 192, 384, 3));
 		new AudioPlay().play("bgmusic\\inter.wav");
@@ -57,9 +56,9 @@ public class TankOther {
 		//乙方坦克复活
 		if (Data.style) {
 			if (onlineTankANum <= 0){
-				if (myTankA > 0){
+				if (Data.myTankA > 0){
 					if (birth_randomA == 1){
-						myTankA--;
+						Data.myTankA--;
 						//坦克出现的位置
 						matA = new TankA(0, 11, 128, 384, 3, 1, 1);
 						Data.matarry.add(0 ,matA);
@@ -69,9 +68,9 @@ public class TankOther {
 				}
 			}
 			if (onlineTankBNum <= 0){
-				if (myTankB > 0){
+				if (Data.myTankB > 0){
 					if (birth_randomB == 1){
-						myTankB--;
+						Data.myTankB--;
 						//坦克出现的位置
 						matB = new TankB(0, 12, 256, 384, 3, 1, 1);
 						Data.matarry.add(0 ,matB);
@@ -83,9 +82,9 @@ public class TankOther {
 		}else {
 			//甲方坦克复活
 			if (onlineTankANum <= 0){
-				if (myTankA > 0){
+				if (Data.myTankA > 0){
 					if (birth_randomA == 1){
-						myTankA--;
+						Data.myTankA--;
 						//坦克出现的位置
 						Data.mat = new TankA(0, 11, 128, 384, 3, 1, 1);
 						Data.matarry.add(0 ,Data.mat);
@@ -139,7 +138,7 @@ public class TankOther {
 					34 * 10 + 1, 34 * 6 + 1, 34 * 11 - 1, 34 * 7 - 1, cc);
 			g.setColor(Color.blue);
 			g.setFont( new Font("微软雅黑",Font.BOLD,19));//设置字体
-	        g.drawString("" + myTankA, Data.MAX_X + 34, Data.MIN_Y + 273);//画文本
+	        g.drawString("" + Data.myTankA, Data.MAX_X + 34, Data.MIN_Y + 273);//画文本
 	        // 乙方
 	        g.drawImage(Data.TANK_PLAN, Data.MAX_X + 60, Data.MIN_Y + 230, Data.MAX_X + 92, Data.MIN_Y + 230 +32, 
 					34 * 2 + 1, 34 * 4 + 1, 34 * 3 - 1, 34 * 5 - 1, cc);
@@ -147,16 +146,20 @@ public class TankOther {
 					34 * 10 + 1, 34 * 6 + 1, 34 * 11 - 1, 34 * 7 - 1, cc);
 			g.setColor(Color.red);
 			g.setFont( new Font("微软雅黑",Font.BOLD,19));//设置字体
-	        g.drawString("" + myTankB, Data.MAX_X + 79, Data.MIN_Y + 273);//画文本
+	        g.drawString("" + Data.myTankB, Data.MAX_X + 79, Data.MIN_Y + 273);//画文本
 		}else {
 			// 单人模式
 			g.drawImage(Data.TANK_PLAN, Data.MAX_X + 43, Data.MIN_Y + 230, Data.MAX_X + 75, Data.MIN_Y + 230 +32, 
 					34 * 2 + 1, 34 * 4 + 1, 34 * 3 - 1, 34 * 5 - 1, cc);
 			g.drawImage(Data.TANK_PLAN, Data.MAX_X + 36, Data.MIN_Y + 248, Data.MAX_X + 68, Data.MIN_Y + 248 +32, 
 					34 * 10 + 1, 34 * 6 + 1, 34 * 11 - 1, 34 * 7 - 1, cc);
+//			g.drawImage(Data.TANK_PLAN, Data.MAX_X + 36, Data.MIN_Y + 280, Data.MAX_X + 68, Data.MIN_Y + 280 +32, 
+//					34 * 21 + 1, 34 * 5 + 1, 34 * 22 - 1, 34 * 6 - 1, cc);
 			g.setColor(Color.black);
 			g.setFont( new Font("微软雅黑",Font.BOLD,19));//设置字体
-	        g.drawString("" + myTankA, Data.MAX_X + 62, Data.MIN_Y + 271);//画文本
+	        g.drawString("" + Data.myTankA, Data.MAX_X + 62, Data.MIN_Y + 271);//画文本
+	        g.setColor(Color.red);
+	        g.drawString("第" + Data.checkNum+"关", Data.MAX_X + 32, Data.MIN_Y + 300);//画文本
 		}
 	}
 }

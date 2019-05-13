@@ -1,8 +1,13 @@
 package com.tank;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;			//字节输出流，用于输出地图文件
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;			//对象输出流
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author linzhongqi
@@ -22,10 +27,17 @@ public class CreateMap {
 	public int directions_y;
 	public int fps;
 	
+	private int pointImg_x = 6;
+	private int pointImg_y = 4;
+	private int point_x = 420;
+	private int point_y = 200;
+	public int Checkpoint = 1;
+	
 	private int select;
+	private int small;
 	private boolean down_key;
 	
-	
+	@SuppressWarnings("unchecked")
 	public CreateMap() {
 		super();
 		Data.matarry.clear();
@@ -39,7 +51,15 @@ public class CreateMap {
 				Data.matarry.add(new Wall(0, 0, 176 + i * 16 , 368 + j * 16, 3));
 			}
 		}
-		
+		try {
+			//文本文件中写多个对象的信息（序列化）
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("map\\"+1+".tmp"));
+			Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
+			ois.close();
+		} catch (Exception e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}
 	}
 
 	public void anew(int fps) {
@@ -60,30 +80,51 @@ public class CreateMap {
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
 					34 * 20 + 1, 34 * 10 + 1, 34 * 21 - 1, 34 * 11 - 1, cc);
 		}
+		// 关卡选择
+		g.drawImage(Data.TANK_POINT, point_x + Data.MIN_X, point_y + Data.MIN_Y, point_x + 32 + Data.MIN_X, point_y + 32 + Data.MIN_Y, 
+				34 * pointImg_x + 1, 34 * pointImg_y, 34 * (pointImg_x + 1), 34 * (pointImg_y + 1), cc);
+		g.drawImage(Data.TANK_POINT, point_x + Data.MIN_X + 64, point_y + Data.MIN_Y, point_x + 96 + Data.MIN_X, point_y + 32 + Data.MIN_Y, 
+				34 * (pointImg_x + 1) + 1, 34 * pointImg_y, 34 * (pointImg_x + 2), 34 * (pointImg_y + 1), cc);
+		g.setColor(Color.black);
+		g.setFont( new Font("宋体",Font.BOLD,16));//设置字体
+        g.drawString("先关卡选择：", Data.MAX_X + 4, Data.MIN_Y + 10);//画文本
+        g.drawString("确定：", Data.MAX_X + 4, Data.MIN_Y + 54);//画文本
+        g.drawString("道具+/-：", Data.MAX_X + 4, Data.MIN_Y + 98);//画文本
+        g.drawString("退出/保存：", Data.MAX_X + 4, Data.MIN_Y + 142);//画文本
+        g.setColor(Color.blue);
+        g.setFont( new Font("宋体",Font.BOLD,12));//设置字体
+        g.drawString("S(↓) W(↑)", Data.MAX_X + 30, Data.MIN_Y + 32);//画文本
+        g.drawString("enter键", Data.MAX_X + 30, Data.MIN_Y + 76);//画文本
+        g.drawString("A键/D键", Data.MAX_X + 30, Data.MIN_Y + 120);//画文本
+        g.drawString("Q键/E键", Data.MAX_X + 30, Data.MIN_Y + 164);//画文本
+        g.setColor(Color.black);
+		g.setFont( new Font("宋体",Font.BOLD,15));//设置字体
+        g.drawString("" + Checkpoint, Data.MIN_X + point_x + 42, Data.MIN_Y + point_y + 21);//画文本
 	}
 	//设置地图，按键按下事件
+	@SuppressWarnings("unchecked")
 	public void downKey(int num){
 		//移动
 		if (num == 0){
-			material_y -= 32;
+			material_y -= 16;
 			if (material_y <= 0){
 				material_y = 0;
 			}
 			down_key = false;
 		}else if (num == 1){
-			material_y += 32;
+			material_y += 16;
 			if (material_y >= 384){
 				material_y = 384;
 			}
 			down_key = false;
 		}else if (num == 2){
-			material_x -= 32;
+			material_x -= 16;
 			if (material_x <= 0){
 				material_x = 0;
 			}
 			down_key = false;
 		}else if (num == 3){
-			material_x += 32;
+			material_x += 16;
 			if (material_x >= 384){
 				material_x = 384;
 			}
@@ -113,13 +154,11 @@ public class CreateMap {
 		}else if (num == 6){
 			try {
 					//文本文件中写多个对象的信息（序列化）
-					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Map.tmp"));
+//					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("map.tmp"));
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("map\\"+Checkpoint+".tmp"));
 					oos.writeObject(Data.matarry);
 					oos.close();
 					System.out.println("已保存");
-//					ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Map.tmp"));
-//					Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
-//					ois.close();
 				} catch (Exception e1) {
 					// TODO 自动生成的 catch 块
 					e1.printStackTrace();
@@ -127,11 +166,57 @@ public class CreateMap {
 			Data.matarry.clear();
 			new GameStart();
 			Data.start = 3;
+		}else if (num == 7) {
+			Data.matarry.clear();
+			new GameStart();
+			Data.start = 3;
+		}else if (num == 8) {
+			this.Checkpoint++;
+			if (this.Checkpoint > 30) {
+				this.Checkpoint = 1;
+			}
+			try {
+				//文本文件中写多个对象的信息（序列化）
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("map\\"+Checkpoint+".tmp"));
+				Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
+				ois.close();
+			} catch (Exception e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+			System.out.println("downKey() => "+this.Checkpoint);
+		}else if (num == 9) {
+			this.Checkpoint--;
+			if (this.Checkpoint < 1) {
+				this.Checkpoint = 30;
+			}
+			try {
+				//文本文件中写多个对象的信息（序列化）
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream("map\\"+Checkpoint+".tmp"));
+				Data.matarry = (CopyOnWriteArrayList<Material>) ois.readObject();
+				ois.close();
+			} catch (Exception e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+		}else if (num == 10) {
+			Data.startpoint = true;
+		}else if (num == 11){
+			if (down_key){
+				small++;
+				if (small > 8){
+					small = 0;
+				}
+				smallMaterial();
+			}else {
+				smallMaterial();
+			}
+			down_key = true;
 		}
-//		System.out.println(select);
+//		System.out.println(small);
 	}
 	
-	/**选择道具*/
+	/**选择大道具*/
 	public void selectMaterial(){
 		if (select == 0){
 			DelMaterial();
@@ -207,14 +292,61 @@ public class CreateMap {
 			}
 		}
 		
-		
 	}
+	/**选择小道具*/
+	public void smallMaterial(){
+		if (small == 0) {
+			DelSmallMaterial();
+		}else if (small == 1) {
+			DelSmallMaterial();
+			Data.matarry.add(new Wall(0, 0, material_x, material_y, 1));
+		}else if (small == 2) {
+			DelSmallMaterial();
+			Data.matarry.add(new Wall(0, 0, material_x + 16, material_y, 1));
+		}else if (small == 3) {
+			DelSmallMaterial();
+			Data.matarry.add(new Wall(0, 0, material_x + 16, material_y + 16, 1));
+		}else if (small == 4) {
+			DelSmallMaterial();
+			Data.matarry.add(new Wall(0, 0, material_x, material_y + 16, 1));
+		}else if (small == 5) {
+			DelSmallMaterial();
+			Data.matarry.add(new Hard(0, 0, material_x, material_y, 1));
+		}else if (small == 6) {
+			DelSmallMaterial();
+			Data.matarry.add(new Hard(0, 0, material_x + 16, material_y, 1));
+		}else if (small == 7) {
+			DelSmallMaterial();
+			Data.matarry.add(new Hard(0, 0, material_x + 16, material_y + 16, 1));
+		}else if (small == 8) {
+			DelSmallMaterial();
+			Data.matarry.add(new Hard(0, 0, material_x, material_y + 16, 1));
+		}
+	}
+	
 	/**移除上一次的道具*/
 	public void DelMaterial(){
 		for (Material mat : Data.matarry) {
 			if (mat.material_x / 32 == material_x /32 && mat.material_y / 32 == material_y / 32){
 				Data.matarry.remove(mat);
 			}
+			if ((mat instanceof Wall | mat instanceof Hard) && mat.refurbish == 1){
+				System.out.println("DelMaterial() => "+mat.material_x+";"+material_x);
+				Data.matarry.remove(mat);
+			}
+			
+		}
+	}
+	/**移除上一次的小道具*/
+	public void DelSmallMaterial(){
+		for (Material mat : Data.matarry) {
+			if ((mat instanceof Wall | mat instanceof Hard) && mat.refurbish == 1){
+				if ((material_x <= mat.material_x && mat.material_x < material_x + 32) && (material_y <= mat.material_y && mat.material_y < material_y + 32)) {
+					Data.matarry.remove(mat);
+				}
+				
+			}
+			
 		}
 	}
 }

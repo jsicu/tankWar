@@ -156,7 +156,6 @@ public class TankA extends Material{
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
-//		System.out.println("draw() => "+ rank +";"+img_x);
 		tempimg_x = rank * 8 + img_x;
 		//若游戏结束，我方坦克不在绘制
 		if (!die) {
@@ -432,7 +431,7 @@ public class TankA extends Material{
 					Data.matarry.add(new Effect(20, 4, material_x, material_y, 5, 32));
 					Data.matarry.remove(this);
 					die = true;
-					if (TankOther.myTankA <= 0){
+					if (Data.myTankA <= 0){
 						new AudioPlay().play("bgmusic\\gameOver.wav");
 						Data.matarry.add(new Effect(20, 4, Data.MIN_X + 112, Data.MAX_Y, 12, 40));
 					}

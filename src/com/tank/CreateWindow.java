@@ -80,10 +80,11 @@ public class CreateWindow extends JFrame{
 					mat.anew(n);
 				}
 				
-				if(Data.start == 2){
+				if (Data.start == 2) {
 					Data.create_map.anew(n);
 				}
 				if (Data.start == 3){
+					Data.startpoint = false;
 					GameStart.anew(n);
 				}
 				cc.repaint();
@@ -188,8 +189,8 @@ public class CreateWindow extends JFrame{
 					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 						Data.matarry.clear();
 						//返回封面，重置数量
-						TankOther.myTankA = 4;			
-						TankOther.myTankB = 4;			
+						Data.myTankA = 4;			
+						Data.myTankB = 4;			
 						TankOther.enemySum = 20;
 						//关闭音乐
 						new AudioPlay().stop();			
@@ -215,14 +216,29 @@ public class CreateWindow extends JFrame{
 					if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 						Data.matarry.clear();
 						//返回封面，重置数量
-						TankOther.myTankA = 4;			
+						Data.myTankA = 4;			
 						TankOther.enemySum = 20;
 						//关闭音乐
 						new AudioPlay().stop();			
 						Data.start = 3;
 					}
 				}//设置地图
-				else if (Data.start == 2){ 
+				else if (Data.start == 2 && !Data.startpoint){ 
+					if (e.getKeyCode() == KeyEvent.VK_W){
+						Data.create_map.downKey(8);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_S){
+						Data.create_map.downKey(9);
+					}
+					// 确定
+					if (e.getKeyCode() == KeyEvent.VK_ENTER){
+						Data.create_map.downKey(10);
+					}
+					// 退出
+					if (e.getKeyCode() == KeyEvent.VK_Q){
+						Data.create_map.downKey(7);
+					}
+				}else if (Data.start == 2 && Data.startpoint) {
 					//getKeyCode 返回与此事件中的键关联的整数 keyCode。
 					if (e.getKeyCode() == KeyEvent.VK_UP){
 						Data.create_map.downKey(0);
@@ -233,17 +249,17 @@ public class CreateWindow extends JFrame{
 					}else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 						Data.create_map.downKey(3);
 					}
-					if (e.getKeyCode() == KeyEvent.VK_S){
+					if (e.getKeyCode() == KeyEvent.VK_SPACE){
 						Data.create_map.downKey(4);
 					}
 					if (e.getKeyCode() == KeyEvent.VK_D){
 						Data.create_map.downKey(5);
 					}
-					if (e.getKeyCode() == KeyEvent.VK_U){
+					if (e.getKeyCode() == KeyEvent.VK_E){
 						Data.create_map.downKey(6);
 					}
-					if (e.getKeyCode() == KeyEvent.VK_Y){
-						Data.create_map.downKey(7);
+					if (e.getKeyCode() == KeyEvent.VK_A){
+						Data.create_map.downKey(11);
 					}
 				}
 				//游戏开始页面

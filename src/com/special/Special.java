@@ -70,7 +70,7 @@ public class Special extends Material {
 				34 * img_x, 34 * img_y, 34 * img_x + 32, 34 * img_y + 32, cc);
 		} else {
 			g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-					34 * (img_x + 1), 34 * img_y, 34 * (img_x + 1) + 32, 34 * img_y + 32, cc);	
+					34 * 17, 34 * img_y, 34 * 17 + 32, 34 * img_y + 32, cc);	
 		}
 		remove(this, false);
 	}
@@ -106,7 +106,14 @@ public class Special extends Material {
 									for (int i = 0; i < 10; i++) {
 										Data.matarry.add(new Effect(21, 4, enemy.material_x, enemy.material_y, 5, 32));
 									}
+									TankOther.onlineEnemyNum--;
 								}
+								System.out.println("moveJudge() => "+TankOther.enemySum+";"+TankOther.onlineEnemyNum);
+							}
+							if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 0) {
+								Data.checkNum ++;
+								System.out.println("moveJudge() => "+Data.checkNum);
+								new Data().delay(4000);
 							}
 							break;
 						case 3:
@@ -125,9 +132,9 @@ public class Special extends Material {
 						case 4:
 							// ÉúÃü+1
 							if (mat instanceof TankA) {
-								TankOther.myTankA ++;
+								Data.myTankA ++;
 							}else {
-								TankOther.myTankB ++;
+								Data.myTankB ++;
 							}
 							break;
 						case 5:
@@ -145,6 +152,10 @@ public class Special extends Material {
 							}else {
 								((TankB)(TankOther.matB)).setRank(((TankB)(TankOther.matB)).getRank() + 1);
 							}
+							break;
+						case 6:
+							TankEnemy.move = false;
+							delay();
 							break;
 						default:
 							break;
@@ -165,7 +176,7 @@ public class Special extends Material {
 				public void run() {
 					Data.matarry.remove(allDie);
 				}
-			}, 10000);
+			}, 15000);
 		}
 		
 	}
@@ -182,7 +193,19 @@ public class Special extends Material {
 				}
 			}
 		}, 20000);
+	}
+	/**ÑÓÊ±*/
+	public void delay() {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				TankEnemy.move = true;
+			}
+		}, 10000);
 		
 	}
+	
+	
 
 }

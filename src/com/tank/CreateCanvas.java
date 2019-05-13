@@ -23,7 +23,13 @@ public class CreateCanvas extends JPanel{
 			TankOther.draw(g, this);
 		}
 		// 自定义地图
-		if (Data.start == 2){
+//		if (Data.start == 2 && !Data.startpoint){
+//			Data.checkpoint.draw(g, this);
+//		}
+//		if (Data.start == 2 && Data.startpoint) {
+//			Data.create_map.draw(g, this);
+//		}
+		if (Data.start == 2) {
 			Data.create_map.draw(g, this);
 		}
 		// 封面

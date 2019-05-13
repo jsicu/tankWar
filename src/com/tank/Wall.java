@@ -13,8 +13,8 @@ public class Wall extends Material{
 	public Wall(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
 //		super.attack_id = 1;
-		super.size_x = 16;
-		super.size_y = 16;
+		super.size_x = 15;
+		super.size_y = 15;
 	}
 
 	@Override

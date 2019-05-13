@@ -16,8 +16,8 @@ public abstract class Material implements Serializable{
 	public int material_y;
 	public int refurbish;
 	public int imgid = 0;
-	public int size_x = 32;		//模型占据空间的大小，默认尺寸32
-	public int size_y = 32;
+	public int size_x = 30;		//模型占据空间的大小，默认尺寸32
+	public int size_y = 30;
 	
 	public int attack_id;		//可被攻击子弹等级
 	public boolean ispenetrate;	//是否可被子弹穿透（false：可穿透，true：不可穿透 ）

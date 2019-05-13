@@ -5,21 +5,13 @@ import java.awt.Graphics;
 public class Wall2 extends Material{
 	//实现序列化类的不同版本间的兼容性
 	private static final long serialVersionUID = 2919258279665521877L;
-//墙
-	
-	
-	
-	private int[] temp_img_1 = new int[4];
-	private int[] temp_img_2 = new int[4];
-	private int[] temp_img_3 = new int[4];
-	private int[] temp_img_4 = new int[4];
-	
-	
+
 	
 	public Wall2(int img_x, int img_y, int material_x, int material_y, int refurbish) {
 		super(img_x, img_y, material_x, material_y, refurbish);
+		super.ispass = true;	
 		super.attack_id = 1;
-		super.ispenetrate = false;
+		super.ispenetrate = true;
 	}
 
 	@Override
@@ -46,126 +38,27 @@ public class Wall2 extends Material{
 	
 	@Override
 	public void anew(int fps) {
-		// TODO 自动生成的方法存根
-		boolean temp = false;
-		for (int i = 0; i < temp_img_1.length; i++) {
-			if (temp_img_1[i] == 0){
-				temp = true;
-			}
-		}
-		for (int i = 0; i < temp_img_2.length; i++) {
-			if (temp_img_2[i] == 0){
-				temp = true;
-			}
-		}
-		for (int i = 0; i < temp_img_3.length; i++) {
-			if (temp_img_3[i] == 0){
-				temp = true;
-			}
-		}
-		for (int i = 0; i < temp_img_4.length; i++) {
-			if (temp_img_4[i] == 0){
-				temp = true;
-			}
-		}
-		
-		if (!temp){
-			Data.matarry.remove(this);
-		}
+		moveJudge();
 	}
 
 	@Override
 	public void draw(Graphics g, CreateCanvas cc) {
 		// TODO 自动生成的方法存根
-//		imgId();
-		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X , material_y + Data.MIN_Y , material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
-				34 * 2 + 1, 34 * 7 + 1, 34 * 3 - 1, 34 * 8 - 1, cc);
-		for (int i = 0; i < temp_img_1.length; i++) {
-			if (temp_img_1[i] != 0){
-				g.fillRect(material_x + Data.MIN_X + i * 8, material_y + Data.MIN_Y, 8, 8);
-			}
-		}
-		for (int i = 0; i < temp_img_2.length; i++) {
-			if (temp_img_2[i] != 0){
-				g.fillRect(material_x + Data.MIN_X + i * 8, material_y + Data.MIN_Y + 8, 8, 8);
-			}
-		}
-		for (int i = 0; i < temp_img_3.length; i++) {
-			if (temp_img_3[i] != 0){
-				g.fillRect(material_x + Data.MIN_X + i * 8, material_y + Data.MIN_Y + 16, 8, 8);
-			}
-		}
-		for (int i = 0; i < temp_img_4.length; i++) {
-			if (temp_img_4[i] != 0){
-				g.fillRect(material_x + Data.MIN_X + i * 8, material_y + Data.MIN_Y + 24, 8, 8);
-			}
-		}
-		
-		
+		g.drawImage(Data.TANK_PLAN, material_x + Data.MIN_X, material_y + Data.MIN_Y, material_x + 32 + Data.MIN_X, material_y + 32 + Data.MIN_Y, 
+				34 * img_x + 1, 34 * img_y + 1, 34 * (img_x + 1) - 1, 34 * (img_y + 1) - 1, cc);
 	}
 
 	@Override
-	public void wounded(Bullet bullet, int principal, int dire, int effect_x, int effect_y) {
-//		if (destroy(dire,num)){
-//			Data.matarry.remove(bullet);
-//			new AudioPlay().play("src\\com\\young\\tank\\brickErase.wav");
-//		}
+	public void wounded(Bullet bullet, int num, int dire, int effect_x, int effect_y) {
+		
 	}
 	
-	public boolean destroy(int a,int b){
-		if (a == 1){
-			if (temp_img_4[b] == 0 || temp_img_4[b - 1] == 0){
-				if (b == 2){
-					temp_img_4[0] = 1;
-					temp_img_4[1] = 1;
-					temp_img_4[2] = 1;
-					temp_img_4[3] = 1;
-				}else{
-					temp_img_4[b] = 1;
-					temp_img_4[b - 1] = 1;
-				}
-				return true;
-			}else {
-				if (temp_img_3[b] == 0 || temp_img_3[b - 1] == 0){
-					if (b == 2){
-						temp_img_3[0] = 1;
-						temp_img_3[1] = 1;
-						temp_img_3[2] = 1;
-						temp_img_3[3] = 1;
-					}else{
-						temp_img_3[b] = 1;
-						temp_img_3[b - 1] = 1;
-					}
-					return true;
-				}else {
-					if (temp_img_2[b] == 0 || temp_img_2[b - 1] == 0){
-						if (b == 2){
-							temp_img_2[0] = 1;
-							temp_img_2[1] = 1;
-							temp_img_2[2] = 1;
-							temp_img_2[3] = 1;
-						}else{
-							temp_img_2[b] = 1;
-							temp_img_2[b - 1] = 1;
-						}
-						return true;
-					}else {
-						if (temp_img_1[b] == 0 || temp_img_1[b - 1] == 0){
-							if (b == 2){
-								temp_img_1[0] = 1;
-								temp_img_1[1] = 1;
-								temp_img_1[2] = 1;
-								temp_img_1[3] = 1;
-							}else{
-								temp_img_1[b] = 1;
-								temp_img_1[b - 1] = 1;
-							}
-							return true;
-						}
-					}
-				}
-			}
+	@SuppressWarnings("unused")
+	private void moveJudge() {		
+		for (Material mat : Data.matarry) {
+			
 		}
-		return false;
 	}
 }
+	
+	

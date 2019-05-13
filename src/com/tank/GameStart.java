@@ -30,6 +30,7 @@ public class GameStart {
 			if (start_id == 2){
 				Data.matarry.clear();
 				new CreateMap();		//自定义地图
+//				new Checkpoint();		//自定义地图
 				Data.start = 2;
 			}else if (start_id == 0){
 				Data.matarry.clear();
