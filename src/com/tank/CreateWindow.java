@@ -25,10 +25,7 @@ public class CreateWindow extends JFrame{
 	private int height;
 	private int fps;
 	private Image logo;
-	private CreateCanvas cc;
 	int n = 0;
-//	private static Material material;
-//	private static Material material1;
 	/**
 	 * ´´½¨´°¿Ú
 	 * 
@@ -282,16 +279,16 @@ public class CreateWindow extends JFrame{
 		
 	}
 	
-	public int getWindowHeight(){
-		return getHeight();
-	}
-	
-	public int getWindowWidth(){
-		return getWidth();
-	}
-	
-	public void canvasRepaint(){
-		cc.repaint();
-	}
+//	public int getWindowHeight(){
+//		return getHeight();
+//	}
+//	
+//	public int getWindowWidth(){
+//		return getWidth();
+//	}
+//	
+//	public void canvasRepaint(){
+//		cc.repaint();
+//	}
 	
 }

@@ -56,6 +56,5 @@ public class Wall extends Material{
 		if (principal <= 2){
 			new AudioPlay().play("bgmusic\\brickErase.wav");
 		}
-		
 	}
 }

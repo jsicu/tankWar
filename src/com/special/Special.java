@@ -108,7 +108,6 @@ public class Special extends Material {
 									}
 									TankOther.onlineEnemyNum--;
 								}
-								System.out.println("moveJudge() => "+TankOther.enemySum+";"+TankOther.onlineEnemyNum);
 							}
 							if (TankOther.enemySum == 0 && TankOther.onlineEnemyNum == 0) {
 								Data.checkNum ++;
@@ -178,7 +177,6 @@ public class Special extends Material {
 				}
 			}, 15000);
 		}
-		
 	}
 	/**移去基地水泥墙特效*/
 	public void removeHard() {
@@ -203,7 +201,6 @@ public class Special extends Material {
 				TankEnemy.move = true;
 			}
 		}, 10000);
-		
 	}
 	
 	

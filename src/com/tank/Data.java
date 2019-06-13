@@ -25,7 +25,6 @@ public class Data {
 	
 	public static CopyOnWriteArrayList<Material> matarry = new CopyOnWriteArrayList<Material>();
 	public static CreateMap create_map = new CreateMap();
-	public static Checkpoint checkpoint = new Checkpoint();
 	public static Material mat;
 	
 	public static final int TANKE_REGION_MIN_X = 0;				//Ì¹¿ËÕ½¶·ÇøÓò

@@ -32,21 +32,21 @@ public abstract class Material implements Serializable{
 		this.refurbish = refurbish;
 	} 
 
-	public int getImg_x() {
-		return img_x;
-	}
-
-	public void setImg_x(int img_x) {
-		this.img_x = img_x;
-	}
-
-	public int getImg_y() {
-		return img_y;
-	}
-
-	public void setImg_y(int img_y) {
-		this.img_y = img_y;
-	}
+//	public int getImg_x() {
+//		return img_x;
+//	}
+//
+//	public void setImg_x(int img_x) {
+//		this.img_x = img_x;
+//	}
+//
+//	public int getImg_y() {
+//		return img_y;
+//	}
+//
+//	public void setImg_y(int img_y) {
+//		this.img_y = img_y;
+//	}
 
 	public int getMaterial_x() {
 		return material_x;
@@ -56,13 +56,13 @@ public abstract class Material implements Serializable{
 		return material_y;
 	}
 
-	public int getRefurbish() {
-		return refurbish;
-	}
-
-	public void setRefurbish(int refurbish) {
-		this.refurbish = refurbish;
-	}
+//	public int getRefurbish() {
+//		return refurbish;
+//	}
+//
+//	public void setRefurbish(int refurbish) {
+//		this.refurbish = refurbish;
+//	}
 	
 //	/**特效移除抽象方法*/
 //	public abstract void remove(int material_x);

@@ -21,18 +21,15 @@ public class CreateMap {
 	public int material_y;
 	public int refurbish = 100;
 	public int imgid = 1;
-	public int size_x = 32;		//Ä¬ÈÏ³ß´ç32
-	public int size_y = 32;
 	public int directions_x;
 	public int directions_y;
 	public int fps;
+	public int Checkpoint = 1;
 	
 	private int pointImg_x = 6;
 	private int pointImg_y = 4;
 	private int point_x = 420;
 	private int point_y = 200;
-	public int Checkpoint = 1;
-	
 	private int select;
 	private int small;
 	private boolean down_key;

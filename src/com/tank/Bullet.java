@@ -15,9 +15,9 @@ public class Bullet extends Material{	//子弹
 		return principal;
 	}
 
-	public void setPrincipal(int principal) {
-		this.principal = principal;
-	}
+//	public void setPrincipal(int principal) {
+//		this.principal = principal;
+//	}
 	/**
 	 * 坦克模型及属性
 	 * 

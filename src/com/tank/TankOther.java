@@ -60,7 +60,7 @@ public class TankOther {
 					if (birth_randomA == 1){
 						Data.myTankA--;
 						//坦克出现的位置
-						matA = new TankA(0, 11, 128, 384, 3, 1, 1);
+						matA = new TankA(0, 11, 128, 384, 4, 1, 2);
 						Data.matarry.add(0 ,matA);
 					}
 					//获取0-100随机数，让坦克死亡后不至于立即出现
@@ -72,7 +72,7 @@ public class TankOther {
 					if (birth_randomB == 1){
 						Data.myTankB--;
 						//坦克出现的位置
-						matB = new TankB(0, 12, 256, 384, 3, 1, 1);
+						matB = new TankB(0, 12, 256, 384, 4, 1, 2);
 						Data.matarry.add(0 ,matB);
 					}
 					//获取0-100随机数，让坦克死亡后不至于里面出现
@@ -86,7 +86,7 @@ public class TankOther {
 					if (birth_randomA == 1){
 						Data.myTankA--;
 						//坦克出现的位置
-						Data.mat = new TankA(0, 11, 128, 384, 3, 1, 1);
+						Data.mat = new TankA(0, 11, 128, 384, 5, 1, 1);
 						Data.matarry.add(0 ,Data.mat);
 					}
 					//获取0-100随机数，让坦克死亡后不至于立即出现
@@ -147,6 +147,7 @@ public class TankOther {
 			g.setColor(Color.red);
 			g.setFont( new Font("微软雅黑",Font.BOLD,19));//设置字体
 	        g.drawString("" + Data.myTankB, Data.MAX_X + 79, Data.MIN_Y + 273);//画文本
+	        g.drawString("第" + Data.checkNum+"关", Data.MAX_X + 32, Data.MIN_Y + 300);//画文本
 		}else {
 			// 单人模式
 			g.drawImage(Data.TANK_PLAN, Data.MAX_X + 43, Data.MIN_Y + 230, Data.MAX_X + 75, Data.MIN_Y + 230 +32, 

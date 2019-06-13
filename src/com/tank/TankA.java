@@ -252,9 +252,7 @@ public class TankA extends Material{
 					if (!mat.ispass){
 						if (mat.getMaterial_x() < material_x + size_x && mat.getMaterial_x() >= material_x + size_x - size_x / 4){
 							if (!(mat.getMaterial_y() +  1 > material_y + size_y || mat.getMaterial_y() + mat.size_y < material_y + 1)){
-//								if (mat.getMaterial_x() <= material_x + size_x){
-									material_x = mat.getMaterial_x() - size_x;
-//								}
+								material_x = mat.getMaterial_x() - size_x;
 							}
 						}
 					}
@@ -313,24 +311,24 @@ public class TankA extends Material{
 		if (directions_x == 0 && directions_y == 0){
 			if (take_up){
 				directions_x = 0;
-				directions_y = -3;
+				directions_y = -2;
 				temp_x = 0;
 				temp_y = -1;
 //				reviseXY(1);
 			}else if (take_down){
 				directions_x = 0;
-				directions_y = 3;
+				directions_y = 2;
 				temp_x = 0;
 				temp_y = 1;
 //				reviseXY(1);
 			}else if (take_left){
-				directions_x = -3;
+				directions_x = -2;
 				directions_y = 0;
 				temp_x = -1;
 				temp_y = 0;
 //				reviseXY(2);
 			}else if (take_right){
-				directions_x = 3;
+				directions_x = 2;
 				directions_y = 0;
 				temp_x = 1;
 				temp_y = 0;
